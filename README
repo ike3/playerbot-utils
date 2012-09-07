@@ -1,0 +1,19 @@
+These utilities could be used in conjunction with Ai Playerbot to achieve better results.
+
+==================== Java Log Analyzer ====================
+log - Java Log Analyzer. It analyzes Server.log with Ai Playerbot debug log is enabled generating a set of reports:
+- actions executed per bot
+- most often failed actions
+- never executed actions
+- action patterns meaning any action repeated too many times 
+
+These reports show bot performance and could be used to find bottlenecks in spell rotation, action sequence, etc.
+
+==================== Character Sync Script ====================
+sync - Character sync script. It synchronizes one or more characters between multiple realms (character databases):
+- Adding spells learning on one realm to another (e.g. a recipe found in classic will be available on WotLK)
+- Marking quests completed on one realm to another
+- Merging reputation gains
+- Merging skills
+
+This tool is useful when you have multiple realms and character with the same name, faction and race on each realm. 
