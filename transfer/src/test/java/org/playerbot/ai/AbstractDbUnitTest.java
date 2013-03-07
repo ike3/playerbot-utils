@@ -6,6 +6,7 @@ import org.dbunit.DefaultDatabaseTester;
 import org.dbunit.IDatabaseTester;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.IDataSet;
+import org.dbunit.dataset.ReplacementDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.CompositeOperation;
 import org.dbunit.operation.DatabaseOperation;
@@ -30,7 +31,9 @@ public abstract class AbstractDbUnitTest extends AbstractTest {
         source.setDataSet(sourceDataSet);
         source.setSetUpOperation(new CompositeOperation(DatabaseOperation.DELETE, DatabaseOperation.INSERT));
 
-        destinationDataSet = getDataSet(getDestinationDataSetName());
+        ReplacementDataSet replacementDataSet = new ReplacementDataSet(getDataSet(getDestinationDataSetName()));
+        replacementDataSet.addReplacementObject("[null]", null);
+        destinationDataSet = replacementDataSet;
         destination.setDataSet(destinationDataSet);
         destination.setSetUpOperation(DatabaseOperation.NONE);
 

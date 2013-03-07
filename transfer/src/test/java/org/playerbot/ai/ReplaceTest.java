@@ -12,7 +12,7 @@ public class ReplaceTest extends AbstractDbUnitTest {
 
         ITable actualData = destinationConnection.createQueryTable("characters",
                 "SELECT * FROM characters WHERE name = 'TestChar'");
-        Assertion.assertEquals(destinationDataSet.getTable("characters"), actualData);
+        Assertion.assertEqualsIgnoreCols(destinationDataSet.getTable("characters"), actualData, new String[] {"guid"});
     }
 
     @Override

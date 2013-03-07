@@ -37,14 +37,5 @@ tools/server.*
 META-INF/MANIFEST.MF
 MANIFEST.MF
 
-cms/core/src/main/java/META-INF/*
-common/core/src/main/java/META-INF/*
-news/git/src/main/java/META-INF/*
-reports/war/src/main/webapp/META-INF/*
-
-#
-# Reporting
-#
-*.rptconfig
-reports/war/src/main/webapp/*.rpt*
-reports/war/src/main/webapp/META-INF/*
+src/main/java/META-INF/*
+tempDataSet.xml
