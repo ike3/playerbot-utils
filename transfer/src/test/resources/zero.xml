@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+    <characters guid="1" account="99999" name="TestChar" race="4" class="3" gender="1" level="19" xp="66"
+        money="48098" playerBytes="101254919" playerBytes2="33554440" playerFlags="3104" position_x="-8814.08"
+        position_y="662.913" position_z="95.4232" map="0" orientation="2.74888" taximask="3456368762 321 536903680 8 0 64 0 0 0 0 0 0 0 0 "
+        online="0" cinematic="1" totaltime="166306" leveltime="108258" logout_time="1361761934" is_logout_resting="1"
+        rest_bonus="0.0" resettalents_cost="0" resettalents_time="0" trans_x="0.0" trans_y="0.0" trans_z="0.0" trans_o="0.0"
+        transguid="0" extra_flags="4" stable_slots="1" at_login="0" zone="1519" death_expire_time="1361709006"
+        taxi_path="" honor_highest_rank="0" honor_standing="0" stored_honor_rating="0.0" stored_dishonorable_kills="0"
+        stored_honorable_kills="0" watchedFaction="4294967295" drunk="0" health="723" power1="1093" power2="0" power3="0"
+        power4="100" power5="0"
+        exploredZones="122817 536871296 2148007936 3766697984 1613512733 49283215 268435480 40 139264 73728000 3443722497 329418 541065280 1141637120 4253587664 276843263 17301506 67297872 1073742016 280104 118358946 26939907 822099724 0 3221225472 256 0 118000640 0 2561 0 1024 0 0 0 268435456 536870912 1048576 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 512 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 "
+        equipmentCache="0 0 21934 0 5404 0 0 0 6473 843 10412 0 10410 0 10411 247 14148 723 10413 0 1156 0 30804 0 0 0 0 0 6449 744 5192 250 43515 0 6469 32 0 0 "
+        ammoId="2515" actionBars="0" />
+</dataset>
