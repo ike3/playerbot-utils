@@ -22,8 +22,12 @@ public class DataSetExporter extends AbstractTest {
         IDatabaseConnection connection = getConnection(CONNECTION_NAME);
 
         QueryDataSet partialDataSet = new QueryDataSet(connection);
-        partialDataSet.addTable("characters", format("SELECT * FROM characters WHERE name = '$character'"));
-        partialDataSet.addTable("character_homebind", format("SELECT t.* FROM character_homebind t INNER JOIN characters c ON c.guid = t.guid WHERE c.name = '$character'"));
+        partialDataSet.addTable("characters",
+                format("SELECT * FROM characters WHERE name = '$character'"));
+        partialDataSet.addTable("character_homebind",
+                format("SELECT t.* FROM character_homebind t INNER JOIN characters c ON c.guid = t.guid WHERE c.name = '$character'"));
+        partialDataSet.addTable("character_pet",
+                format("SELECT t.* FROM character_pet t INNER JOIN characters c ON c.guid = t.owner WHERE c.name = '$character'"));
         FlatXmlDataSet.write(partialDataSet, new FileOutputStream("src/test/resources/tempDataSet.xml"));
     }
 

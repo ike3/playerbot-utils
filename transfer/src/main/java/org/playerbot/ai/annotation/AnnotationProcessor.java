@@ -84,8 +84,12 @@ public class AnnotationProcessor {
     public Object[] read(Object object, ColumnMeta[] columns) {
         Object[] data = new Object[columns.length];
         for (int i = 0; i < columns.length; i++) {
-            data[i] = ReflectUtils.getInstance().getFieldValue(object, columns[i].getField().getName());
+            data[i] = read(object, columns[i]);
         }
         return data;
+    }
+
+    public Object read(Object object, ColumnMeta column) {
+        return ReflectUtils.getInstance().getFieldValue(object, column.getField().getName());
     }
 }

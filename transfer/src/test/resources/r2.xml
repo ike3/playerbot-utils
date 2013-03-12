@@ -16,4 +16,12 @@
 
     <character_homebind guid="99999" map="1" zone="467" position_x="2714.47" position_y="1509.16"
         position_z="236.82" />
+
+    <character_pet id="99999" entry="822" owner="99999" modelid="1006" CreatedBySpell="883" PetType="1"
+        level="19" exp="0" Reactstate="256" name="Bear" renamed="0" slot="0" curhealth="813" curmana="0" curhappiness="758683"
+        savetime="1361761934" abdata="7 2 7 1 7 0 193 16829 193 53526 193 14916 129 0 6 2 6 1 6 0 " />
+
+    <character_pet id="999999" entry="823" owner="99999" modelid="1006" CreatedBySpell="883" PetType="1"
+        level="11" exp="0" Reactstate="256" name="Cat" renamed="0" slot="0" curhealth="813" curmana="0" curhappiness="758683"
+        savetime="1361761934" abdata="7 2 7 1 7 0 193 16829 193 53526 193 14916 129 0 6 2 6 1 6 0 " />
 </dataset>

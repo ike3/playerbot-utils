@@ -15,4 +15,17 @@
 
     <character_homebind guid="1" map="1" zone="467" position_x="2714.47" position_y="1509.16"
         position_z="236.82" />
+
+    <character_pet id="1" entry="822" owner="1" modelid="1006" CreatedBySpell="883" PetType="1"
+        level="19" exp="0" Reactstate="1" name="Bear" renamed="0" slot="0" curhealth="813" curmana="0" curhappiness="758683"
+        savetime="1361761934" abdata="7 2 7 1 7 0 193 16829 193 53526 193 14916 129 0 6 2 6 1 6 0 "
+        loyalty="0" loyaltypoints="0" resettalents_cost="0"  resettalents_time="0"
+        teachspelldata="[null]"  trainpoint="0" />
+
+    <character_pet id="2" entry="823" owner="1" modelid="1006" CreatedBySpell="883" PetType="1"
+        level="11" exp="0" Reactstate="1" name="Cat" renamed="0" slot="0" curhealth="813" curmana="0" curhappiness="758683"
+        savetime="1361761934" abdata="7 2 7 1 7 0 193 16829 193 53526 193 14916 129 0 6 2 6 1 6 0 "
+        loyalty="0" loyaltypoints="0" resettalents_cost="0"  resettalents_time="0"
+        teachspelldata="[null]"  trainpoint="0" />
+
 </dataset>

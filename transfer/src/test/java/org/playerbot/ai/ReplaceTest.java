@@ -17,6 +17,10 @@ public class ReplaceTest extends AbstractDbUnitTest {
         actualData = destinationConnection.createQueryTable("character_homebind",
                 "SELECT t.* FROM character_homebind t INNER JOIN characters c ON c.guid = t.guid WHERE c.name = 'TestChar'");
         Assertion.assertEqualsIgnoreCols(destinationDataSet.getTable("character_homebind"), actualData, new String[] {"guid"});
+
+        actualData = destinationConnection.createQueryTable("character_pet",
+                "SELECT t.* FROM character_pet t INNER JOIN characters c ON c.guid = t.owner WHERE c.name = 'TestChar' ORDER BY t.id");
+        Assertion.assertEqualsIgnoreCols(destinationDataSet.getTable("character_pet"), actualData, new String[] {"id", "owner"});
     }
 
     @Override

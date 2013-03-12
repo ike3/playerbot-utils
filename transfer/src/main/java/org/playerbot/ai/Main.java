@@ -57,6 +57,8 @@ public class Main {
         Database source = connect(sourceConnectionName);
         Character character = source.select(characterName);
 
+        linkColumns(character);
+
         Database destination = connect(destinationConnectionName);
         if (replace) {
             destination.delete(characterName);
@@ -64,6 +66,21 @@ public class Main {
         destination.update(character);
 
         dumpXml();
+    }
+
+    private void linkColumns(Character character) throws Exception {
+        String sourceVersion = config.getDatabaseConfiguration(sourceConnectionName).getVersion();
+        String destinationVersion = config.getDatabaseConfiguration(destinationConnectionName).getVersion();
+        ColumnConverter converter = new ColumnConverter(sourceVersion, destinationVersion);
+        converter.convert(character);
+        converter.convert(character.getHomebind());
+        converter.convert(character.getPets());
+        converter.convert(character.getItemInstances());
+        converter.convert(character.getInventory());
+        converter.convert(character.getReputation());
+        converter.convert(character.getSpells());
+        converter.convert(character.getSkills());
+        converter.convert(character.getQuests());
     }
 
     private void dumpXml() {
