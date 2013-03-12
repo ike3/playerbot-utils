@@ -36,6 +36,8 @@ public class DataSetExporter extends AbstractTest {
                 format("SELECT t.* FROM character_reputation t INNER JOIN characters c ON c.guid = t.guid WHERE c.name = '$character'"));
         partialDataSet.addTable("character_skills",
                 format("SELECT t.* FROM character_skills t INNER JOIN characters c ON c.guid = t.guid WHERE c.name = '$character'"));
+        partialDataSet.addTable("character_spell",
+                format("SELECT t.* FROM character_spell t INNER JOIN characters c ON c.guid = t.guid WHERE c.name = '$character'"));
         FlatXmlDataSet.write(partialDataSet, new FileOutputStream("src/test/resources/tempDataSet.xml"));
     }
 
