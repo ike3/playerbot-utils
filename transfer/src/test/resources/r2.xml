@@ -47,4 +47,10 @@
     <character_reputation guid="99999" faction="46" standing="0" flags="4" />
     <character_reputation guid="99999" faction="47" standing="7629" flags="273" />
 
+    <character_skills guid="99999" skill="43" value="42" max="95" />
+    <character_skills guid="99999" skill="45" value="95" max="95" />
+    <character_skills guid="99999" skill="51" value="1" max="1" />
+    <character_skills guid="99999" skill="55" value="1" max="95" />
+    <character_skills guid="99999" skill="95" value="89" max="95" />
+
 </dataset>
