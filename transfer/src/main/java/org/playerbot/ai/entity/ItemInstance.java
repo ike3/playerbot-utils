@@ -5,6 +5,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 
 import org.playerbot.ai.annotation.For;
 import org.playerbot.ai.annotation.Key;
+import org.playerbot.ai.annotation.MaxLength;
+import org.playerbot.ai.annotation.SpaceSeparated;
 import org.playerbot.ai.annotation.Table;
 
 @XmlAccessorType(XmlAccessType.NONE)
@@ -13,6 +15,7 @@ public class ItemInstance {
     private long guid;
     @Key
     private long owner_guid;
+    @SpaceSeparated({ @MaxLength(version = "r2", value = 64), @MaxLength(version = "mangoszero", value = 48) })
     private String data;
 
     @For("r2")

@@ -24,4 +24,23 @@
     <character_pet id="999999" entry="823" owner="99999" modelid="1006" CreatedBySpell="883" PetType="1"
         level="11" exp="0" Reactstate="256" name="Cat" renamed="0" slot="0" curhealth="813" curmana="0" curhappiness="758683"
         savetime="1361761934" abdata="7 2 7 1 7 0 193 16829 193 53526 193 14916 129 0 6 2 6 1 6 0 " />
+
+    <character_inventory guid="99999" bag="0" slot="23" item="99999991" item_template="6948" />
+    <character_inventory guid="99999" bag="0" slot="26" item="99999992" item_template="7005" />
+    <character_inventory guid="99999" bag="0" slot="28" item="99999993" item_template="2901" />
+    <character_inventory guid="99999" bag="0" slot="30" item="99999994" item_template="12225" />
+
+    <item_instance guid="99999991" owner_guid="99999"
+        data="52198324 1191182336 3 6948 1065353216 0 7521 0 7521 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"
+        text="" />
+    <item_instance guid="99999992" owner_guid="99999"
+        data="52841571 1191182336 3 7005 1065353216 0 7521 0 7521 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"
+        text="" />
+    <item_instance guid="99999993" owner_guid="99999"
+        data="53110865 1191182336 3 2901 1065353216 0 7521 0 7521 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"
+        text="" />
+    <item_instance guid="99999994" owner_guid="99999"
+        data="53111642 1191182336 3 12225 1065353216 0 7521 0 7521 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 25 25 0 0"
+        text="" />
+
 </dataset>

@@ -28,4 +28,22 @@
         loyalty="0" loyaltypoints="0" resettalents_cost="0"  resettalents_time="0"
         teachspelldata="[null]"  trainpoint="0" />
 
+    <character_inventory guid="99999" bag="0" slot="23" item="1" item_template="6948" />
+    <character_inventory guid="99999" bag="0" slot="26" item="2" item_template="7005" />
+    <character_inventory guid="99999" bag="0" slot="28" item="3" item_template="2901" />
+    <character_inventory guid="99999" bag="0" slot="30" item="4" item_template="12225" />
+
+    <item_instance guid="1" owner_guid="99999"
+        data="52198324 1191182336 3 6948 1065353216 0 7521 0 7521 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"
+        />
+    <item_instance guid="2" owner_guid="99999"
+        data="52841571 1191182336 3 7005 1065353216 0 7521 0 7521 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"
+        />
+    <item_instance guid="3" owner_guid="99999"
+        data="53110865 1191182336 3 2901 1065353216 0 7521 0 7521 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"
+        />
+    <item_instance guid="4" owner_guid="99999"
+        data="53111642 1191182336 3 12225 1065353216 0 7521 0 7521 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"
+        />
+
 </dataset>

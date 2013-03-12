@@ -28,6 +28,10 @@ public class DataSetExporter extends AbstractTest {
                 format("SELECT t.* FROM character_homebind t INNER JOIN characters c ON c.guid = t.guid WHERE c.name = '$character'"));
         partialDataSet.addTable("character_pet",
                 format("SELECT t.* FROM character_pet t INNER JOIN characters c ON c.guid = t.owner WHERE c.name = '$character'"));
+        partialDataSet.addTable("character_inventory",
+                format("SELECT t.* FROM character_inventory t INNER JOIN characters c ON c.guid = t.guid WHERE c.name = '$character'"));
+        partialDataSet.addTable("item_instance",
+                format("SELECT t.* FROM item_instance t INNER JOIN characters c ON c.guid = t.owner_guid WHERE c.name = '$character'"));
         FlatXmlDataSet.write(partialDataSet, new FileOutputStream("src/test/resources/tempDataSet.xml"));
     }
 

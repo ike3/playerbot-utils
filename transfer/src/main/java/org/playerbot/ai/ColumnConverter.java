@@ -1,9 +1,13 @@
 package org.playerbot.ai;
 
+import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.playerbot.ai.annotation.AnnotationProcessor;
 import org.playerbot.ai.annotation.ColumnMeta;
+import org.playerbot.ai.annotation.MaxLength;
+import org.playerbot.ai.annotation.SpaceSeparated;
 
 public class ColumnConverter {
 
@@ -28,15 +32,33 @@ public class ColumnConverter {
 
         for (ColumnMeta leftColumn : source.getColumns()) {
             for (ColumnMeta rightColumn : destination.getColumns()) {
-                if (leftColumn.equals(rightColumn))
-                    continue;
+                Object value = source.read(object, leftColumn);
 
-                if (rightColumn.isLinkedTo(leftColumn)) {
-                    Object value = source.read(object, leftColumn);
+                if (leftColumn.equals(rightColumn)) {
+                    destination.apply(object, rightColumn, processAnnotations(value, rightColumn));
+                }
+                else if (rightColumn.isLinkedTo(leftColumn)) {
                     destination.apply(object, rightColumn, value);
                 }
             }
         }
+    }
+
+    private Object processAnnotations(Object value, ColumnMeta column) {
+        if (value == null)
+            return null;
+
+        SpaceSeparated spaceSeparated = column.getField().getAnnotation(SpaceSeparated.class);
+        if (spaceSeparated != null) {
+            for (MaxLength length : spaceSeparated.value()) {
+                if (destinationVersion.equals(length.version())) {
+                    String[] values = value.toString().split("\\s");
+                    return StringUtils.join(Arrays.copyOfRange(values, 0, length.value()), " ");
+                }
+            }
+        }
+
+        return value;
     }
 
 }
