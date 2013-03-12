@@ -46,4 +46,8 @@
         data="53111642 1191182336 3 12225 1065353216 0 7521 0 7521 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"
         />
 
+    <character_reputation guid="99999" faction="21" standing="500" flags="65" />
+    <character_reputation guid="99999" faction="46" standing="0" flags="4" />
+    <character_reputation guid="99999" faction="47" standing="7629" flags="273" />
+
 </dataset>
