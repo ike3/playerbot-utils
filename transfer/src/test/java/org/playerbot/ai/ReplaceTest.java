@@ -10,41 +10,45 @@ public class ReplaceTest extends AbstractDbUnitTest {
     public void r2ToZero() throws Exception {
         replace();
 
-        ITable actualData = destinationConnection.createQueryTable("characters",
-                "SELECT * FROM characters WHERE name = 'TestChar'");
-        Assertion.assertEqualsIgnoreCols(destinationDataSet.getTable("characters"), actualData, new String[] {"guid"});
+        checkTable("characters", "SELECT * FROM characters WHERE name = 'TestChar'", "guid");
 
-        actualData = destinationConnection.createQueryTable("character_homebind",
-                "SELECT t.* FROM character_homebind t INNER JOIN characters c ON c.guid = t.guid WHERE c.name = 'TestChar'");
-        Assertion.assertEqualsIgnoreCols(destinationDataSet.getTable("character_homebind"), actualData, new String[] {"guid"});
+        checkTable("character_homebind",
+                "SELECT t.* FROM character_homebind t INNER JOIN characters c ON c.guid = t.guid WHERE c.name = 'TestChar'",
+                "guid");
 
-        actualData = destinationConnection.createQueryTable("character_pet",
-                "SELECT t.* FROM character_pet t INNER JOIN characters c ON c.guid = t.owner WHERE c.name = 'TestChar' ORDER BY t.id");
-        Assertion.assertEqualsIgnoreCols(destinationDataSet.getTable("character_pet"), actualData, new String[] {"id", "owner"});
+        checkTable("character_pet",
+                "SELECT t.* FROM character_pet t INNER JOIN characters c ON c.guid = t.owner WHERE c.name = 'TestChar' ORDER BY t.id",
+                "id", "owner");
 
-        actualData = destinationConnection.createQueryTable("character_inventory",
-                "SELECT t.* FROM character_inventory t INNER JOIN characters c ON c.guid = t.guid WHERE c.name = 'TestChar' ORDER BY t.slot");
-        Assertion.assertEqualsIgnoreCols(destinationDataSet.getTable("character_inventory"), actualData, new String[] {"guid","item"});
+        checkTable("character_inventory",
+                "SELECT t.* FROM character_inventory t INNER JOIN characters c ON c.guid = t.guid WHERE c.name = 'TestChar' ORDER BY t.slot",
+                "guid","item");
 
-        actualData = destinationConnection.createQueryTable("item_instance",
-                "SELECT t.* FROM item_instance t INNER JOIN characters c ON c.guid = t.owner_guid WHERE c.name = 'TestChar' ORDER BY t.guid");
-        Assertion.assertEqualsIgnoreCols(destinationDataSet.getTable("item_instance"), actualData, new String[] {"guid", "owner_guid"});
+        checkTable("item_instance",
+                "SELECT t.* FROM item_instance t INNER JOIN characters c ON c.guid = t.owner_guid WHERE c.name = 'TestChar' ORDER BY t.guid",
+                "guid", "owner_guid");
 
-        actualData = destinationConnection.createQueryTable("character_reputation",
-                "SELECT t.* FROM character_reputation t INNER JOIN characters c ON c.guid = t.guid WHERE c.name = 'TestChar' ORDER BY t.faction");
-        Assertion.assertEqualsIgnoreCols(destinationDataSet.getTable("character_reputation"), actualData, new String[] {"guid"});
+        checkTable("character_reputation",
+                "SELECT t.* FROM character_reputation t INNER JOIN characters c ON c.guid = t.guid WHERE c.name = 'TestChar' ORDER BY t.faction",
+                "guid");
 
-        actualData = destinationConnection.createQueryTable("character_skills",
-                "SELECT t.* FROM character_skills t INNER JOIN characters c ON c.guid = t.guid WHERE c.name = 'TestChar' ORDER BY t.skill");
-        Assertion.assertEqualsIgnoreCols(destinationDataSet.getTable("character_skills"), actualData, new String[] {"guid"});
+        checkTable("character_skills",
+                "SELECT t.* FROM character_skills t INNER JOIN characters c ON c.guid = t.guid WHERE c.name = 'TestChar' ORDER BY t.skill",
+                "guid");
 
-        actualData = destinationConnection.createQueryTable("character_spell",
-                "SELECT t.* FROM character_spell t INNER JOIN characters c ON c.guid = t.guid WHERE c.name = 'TestChar' ORDER BY t.spell");
-        Assertion.assertEqualsIgnoreCols(destinationDataSet.getTable("character_spell"), actualData, new String[] {"guid"});
+        checkTable("character_spell",
+                "SELECT t.* FROM character_spell t INNER JOIN characters c ON c.guid = t.guid WHERE c.name = 'TestChar' ORDER BY t.spell",
+                "guid");
 
-        actualData = destinationConnection.createQueryTable("character_queststatus",
-                "SELECT t.* FROM character_queststatus t INNER JOIN characters c ON c.guid = t.guid WHERE c.name = 'TestChar' ORDER BY t.quest");
-        Assertion.assertEqualsIgnoreCols(destinationDataSet.getTable("character_queststatus"), actualData, new String[] {"guid"});
+        checkTable("character_queststatus",
+                "SELECT t.* FROM character_queststatus t INNER JOIN characters c ON c.guid = t.guid WHERE c.name = 'TestChar' ORDER BY t.quest",
+                "guid");
+    }
+
+    protected void checkTable(String tableName, String sql, String... ignoreColumns) throws Exception {
+        ITable actualData = destinationConnection.createQueryTable(tableName,
+                sql);
+        Assertion.assertEqualsIgnoreCols(destinationDataSet.getTable(tableName), actualData, ignoreColumns);
     }
 
     @Override
