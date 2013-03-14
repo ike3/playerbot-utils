@@ -48,16 +48,16 @@ public class ReplaceTest extends AbstractDbUnitTest {
     protected void checkTable(String tableName, String sql, String... ignoreColumns) throws Exception {
         ITable actualData = destinationConnection.createQueryTable(tableName,
                 sql);
-        Assertion.assertEqualsIgnoreCols(destinationDataSet.getTable(tableName), actualData, ignoreColumns);
+        Assertion.assertEqualsIgnoreCols(expectedDataSet.getTable(tableName), actualData, ignoreColumns);
     }
 
     @Override
-    protected String getDestinationDataSetName() {
+    protected String getExpectedDataSetName() {
         return "zero.xml";
     }
 
     @Override
-    protected String getSourceDataSetName() {
+    protected String getSourceSetupDataSetName() {
         return "r2.xml";
     }
 
