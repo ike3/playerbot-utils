@@ -46,9 +46,10 @@ public abstract class JdbcDatabase implements Database {
         return select(type, new Object[] { key }, new QueryBuilder() {
             @Override
             public String build(AnnotationProcessor annotationProcessor) {
-                return String.format("SELECT %s FROM %s WHERE %s = ?",
+                return String.format("SELECT %s FROM %s WHERE %s = ? ORDER BY %s",
                         StringUtils.join(annotationProcessor.getColumnNames(), ","),
                         annotationProcessor.getTableName(),
+                        annotationProcessor.getKey(),
                         annotationProcessor.getKey());
             }
         });

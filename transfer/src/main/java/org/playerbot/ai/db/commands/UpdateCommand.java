@@ -144,15 +144,25 @@ public class UpdateCommand extends AbstractCommand {
         long firstItemGuid = 1 + database
                 .queryForLong("SELECT MAX(guid) FROM (SELECT guid FROM item_instance UNION SELECT item as guid FROM character_inventory) q");
         long itemInstanceCounter = 0;
+        Long newOwner = character.getGuid();
         for (ItemInstance itemInstance : character.getItemInstances()) {
-            itemInstance.setOwner_guid(character.getGuid());
-            itemInstance.setGuid(firstItemGuid + itemInstanceCounter++);
+            long oldGuid = itemInstance.getGuid();
+            long newGuid = firstItemGuid + itemInstanceCounter++;
+            long oldOwner = itemInstance.getOwner_guid();
+
+            String data = itemInstance.getData();
+            data = data.replaceAll(Long.toString(oldGuid), Long.toString(newGuid));
+            data = data.replaceAll(Long.toString(oldOwner), Long.toString(newOwner));
+
+            itemInstance.setOwner_guid(newOwner);
+            itemInstance.setGuid(newGuid);
+            itemInstance.setData(data);
             database.insert(ItemInstance.class, itemInstance);
         }
 
         long inventoryCounter = 0;
         for (CharacterInventory inventory : character.getInventory()) {
-            inventory.setGuid(character.getGuid());
+            inventory.setGuid(newOwner);
             inventory.setItem(firstItemGuid + inventoryCounter++);
             database.insert(CharacterInventory.class, inventory);
         }

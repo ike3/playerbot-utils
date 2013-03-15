@@ -53,7 +53,7 @@ public class ColumnConverter {
             for (MaxLength length : spaceSeparated.value()) {
                 if (destinationVersion.equals(length.version())) {
                     String[] values = value.toString().split("\\s");
-                    return StringUtils.join(Arrays.copyOfRange(values, 0, length.value()), " ");
+                    return StringUtils.join(Arrays.copyOfRange(values, 0, Math.min(values.length, length.value())), " ");
                 }
             }
         }
