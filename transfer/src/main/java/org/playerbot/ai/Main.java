@@ -25,8 +25,8 @@ public class Main {
     @Parameter(names = "-name", description = "Character Name", required = true)
     String characterName;
 
-    @Parameter(names = "-replace", description = "Replace", required = false)
-    Boolean replace = false;
+    @Parameter(names = "-mode", description = "Mode (update,replace,delete)", required = false)
+    String mode = "update";
 
     private Configuration config;
     private XmlDatabase xmlDatabase = new XmlDatabase();
@@ -60,10 +60,13 @@ public class Main {
         linkColumns(character);
 
         Database destination = connect(destinationConnectionName);
-        if (replace) {
+        if ("replace".equals(mode) || "delete".equals(mode)) {
             destination.delete(characterName);
         }
-        destination.update(character);
+
+        if ("replace".equals(mode) || "update".equals(mode)) {
+            destination.update(character);
+        }
 
         dumpXml();
     }

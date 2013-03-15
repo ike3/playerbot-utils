@@ -1,7 +1,5 @@
 package org.playerbot.ai;
 
-import java.io.FileInputStream;
-
 import org.dbunit.Assertion;
 import org.dbunit.DefaultDatabaseTester;
 import org.dbunit.IDatabaseTester;
@@ -23,7 +21,7 @@ public abstract class AbstractDbUnitTest extends AbstractTest {
     protected IDataSet expectedDataSet;
 
     @Before
-    public void before() throws Exception {
+    public final void before() throws Exception {
         loadConfig();
 
         sourceConnection = getConnection(getSourceConnectionName());
@@ -44,6 +42,8 @@ public abstract class AbstractDbUnitTest extends AbstractTest {
             destination.setSetUpOperation(DatabaseOperation.NONE);
         }
 
+        onBeforeSetup();
+
         source.onSetup();
         destination.onSetup();
 
@@ -51,13 +51,13 @@ public abstract class AbstractDbUnitTest extends AbstractTest {
     }
 
     protected IDataSet getDataSet(String resourceName) throws Exception {
-        FlatXmlDataSet dataSet = new FlatXmlDataSetBuilder().build(new FileInputStream("src/test/resources/" + resourceName));
+        FlatXmlDataSet dataSet = new FlatXmlDataSetBuilder().build(getClass().getResourceAsStream(resourceName));
         ReplacementDataSet replacementDataSet = new ReplacementDataSet(dataSet);
         replacementDataSet.addReplacementObject("[null]", null);
         return replacementDataSet;
     }
 
-    protected void checkTables() throws Exception {
+    protected void assertDestinationValid() throws Exception {
         checkTable("characters", "SELECT * FROM characters WHERE name = 'TestChar'", "guid");
 
         checkTable("character_homebind",
@@ -101,9 +101,22 @@ public abstract class AbstractDbUnitTest extends AbstractTest {
         destinationConnection.close();
     }
 
+    protected void onBeforeSetup() throws Exception {
+    }
+
     protected abstract String getExpectedDataSetName();
     protected abstract String getSourceSetupDataSetName();
     protected String getDestinationSetupDataSetName() { return null; }
     protected abstract String getDestinationConnectionName();
     protected abstract String getSourceConnectionName();
+
+    protected void process(String mode) throws Exception {
+        Main main = new Main();
+        main.characterName = "TestChar";
+        main.sourceConnectionName = getSourceConnectionName();
+        main.destinationConnectionName = getDestinationConnectionName();
+        main.mode = mode;
+        main.configurationFileName = "src/main/resources/config.xml";
+        main.run();
+    }
 }
