@@ -112,11 +112,11 @@ public abstract class AbstractDbUnitTest extends AbstractTest {
 
     protected void process(String mode) throws Exception {
         Main main = new Main();
-        main.characterName = "TestChar";
         main.sourceConnectionName = getSourceConnectionName();
         main.destinationConnectionName = getDestinationConnectionName();
         main.mode = mode;
         main.configurationFileName = "src/main/resources/config.xml";
-        main.run();
+        main.connect();
+        main.run("TestChar");
     }
 }

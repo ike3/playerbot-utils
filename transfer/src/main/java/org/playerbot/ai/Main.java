@@ -1,5 +1,8 @@
 package org.playerbot.ai;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.WordUtils;
 import org.playerbot.ai.config.Configuration;
@@ -23,15 +26,17 @@ public class Main {
     String destinationConnectionName;
 
     @Parameter(names = "-name", description = "Character Name", required = true)
-    String characterName;
+    List<String> characterNames = new ArrayList<String>();
 
     @Parameter(names = "-mode", description = "Mode (update,replace,delete)", required = false)
     String mode = "update";
 
     private Configuration config;
     private XmlDatabase xmlDatabase = new XmlDatabase();
+    private Database destination;
+    private Database source;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Main main = new Main();
         try {
             new JCommander(main, args);
@@ -40,10 +45,18 @@ public class Main {
             return;
         }
 
-        try {
-            main.run();
-        } catch (Exception e) {
-            reportError(e);
+        main.run();
+    }
+
+    void run() throws Exception {
+        connect();
+
+        for (String characterName : characterNames) {
+            try {
+                run(characterName);
+            } catch (Exception e) {
+                reportError(e);
+            }
         }
     }
 
@@ -51,16 +64,18 @@ public class Main {
         System.err.println(WordUtils.wrap(e.getLocalizedMessage(), 80));
     }
 
-    void run() throws Exception {
+    void connect() throws Exception {
         config = Configuration.load(configurationFileName);
+        destination = connect(destinationConnectionName);
+        source = connect(sourceConnectionName);
+    }
 
-        Database destination = connect(destinationConnectionName);
+    void run(String characterName) throws Exception {
         if ("replace".equals(mode) || "delete".equals(mode)) {
             destination.delete(characterName);
         }
 
         if ("replace".equals(mode) || "update".equals(mode)) {
-            Database source = connect(sourceConnectionName);
             Character character = source.select(characterName);
             linkColumns(character);
             destination.update(character);
