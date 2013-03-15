@@ -54,17 +54,15 @@ public class Main {
     void run() throws Exception {
         config = Configuration.load(configurationFileName);
 
-        Database source = connect(sourceConnectionName);
-        Character character = source.select(characterName);
-
-        linkColumns(character);
-
         Database destination = connect(destinationConnectionName);
         if ("replace".equals(mode) || "delete".equals(mode)) {
             destination.delete(characterName);
         }
 
         if ("replace".equals(mode) || "update".equals(mode)) {
+            Database source = connect(sourceConnectionName);
+            Character character = source.select(characterName);
+            linkColumns(character);
             destination.update(character);
         }
 

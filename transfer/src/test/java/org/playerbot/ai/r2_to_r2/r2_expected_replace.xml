@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+    <characters guid="99999" account="99999" name="TestChar" race="4" class="3" gender="1" level="19" xp="66"
+        money="48098" playerBytes="101254919" playerBytes2="33554440" playerFlags="3104" position_x="-8814.08"
+        position_y="662.913" position_z="95.4232" map="0" dungeon_difficulty="0" orientation="2.74888"
+        taximask="3456368762 321 536903680 8 0 64 0 0 0 0 0 0 0 0 " online="0" cinematic="1" totaltime="166306"
+        leveltime="108258" logout_time="1361761934" is_logout_resting="1" rest_bonus="0.0" resettalents_cost="0"
+        resettalents_time="0" trans_x="0.0" trans_y="0.0" trans_z="0.0" trans_o="0.0" transguid="0" extra_flags="4"
+        stable_slots="1" at_login="0" zone="1519" death_expire_time="1361709006" taxi_path="" arenaPoints="0"
+        totalHonorPoints="449" todayHonorPoints="0" yesterdayHonorPoints="55" totalKills="29" todayKills="0"
+        yesterdayKills="3" chosenTitle="0" knownCurrencies="0" watchedFaction="4294967295" drunk="0" health="723"
+        power1="1093" power2="0" power3="0" power4="100" power5="0" power6="0" power7="0" specCount="1" activeSpec="0"
+        exploredZones="122817 536871296 2148007936 3766697984 1613512733 49283215 268435480 40 139264 73728000 3443722497 329418 541065280 1141637120 4253587664 276843263 17301506 67297872 1073742016 280104 118358946 26939907 822099724 0 3221225472 256 0 118000640 0 2561 0 1024 0 0 0 268435456 536870912 1048576 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 512 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 "
+        equipmentCache="0 0 21934 0 5404 0 0 0 6473 843 10412 0 10410 0 10411 247 14148 723 10413 0 1156 0 30804 0 0 0 0 0 6449 744 5192 250 43515 0 6469 32 0 0 "
+        ammoId="2515" knownTitles="0 0 0 0 0 0 " actionBars="0" grantableLevels="0"
+        deleteDate="[null]" deleteInfos_Account="[null]" deleteInfos_Name="[null]"/>
+
+    <character_homebind guid="99999" map="1" zone="467" position_x="2714.47" position_y="1509.16"
+        position_z="236.82" />
+
+    <character_pet id="99999" entry="822" owner="99999" modelid="1006" CreatedBySpell="883" PetType="1"
+        level="19" exp="0" Reactstate="256" name="Bear" renamed="0" slot="0" curhealth="813" curmana="0" curhappiness="758683"
+        savetime="1361761934" abdata="7 2 7 1 7 0 193 16829 193 53526 193 14916 129 0 6 2 6 1 6 0 " />
+
+    <character_pet id="999999" entry="823" owner="99999" modelid="1006" CreatedBySpell="883" PetType="1"
+        level="11" exp="0" Reactstate="256" name="Cat" renamed="0" slot="0" curhealth="813" curmana="0" curhappiness="758683"
+        savetime="1361761934" abdata="7 2 7 1 7 0 193 16829 193 53526 193 14916 129 0 6 2 6 1 6 0 " />
+
+    <character_inventory guid="99999" bag="0" slot="23" item="99999991" item_template="6948" />
+    <character_inventory guid="99999" bag="0" slot="26" item="99999992" item_template="7005" />
+    <character_inventory guid="99999" bag="0" slot="28" item="99999993" item_template="2901" />
+    <character_inventory guid="99999" bag="0" slot="30" item="99999994" item_template="12225" />
+
+    <item_instance guid="99999991" owner_guid="99999"
+        data="52198324 1191182336 3 6948 1065353216 0 7521 0 7521 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"
+        text="" />
+    <item_instance guid="99999992" owner_guid="99999"
+        data="52841571 1191182336 3 7005 1065353216 0 7521 0 7521 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"
+        text="" />
+    <item_instance guid="99999993" owner_guid="99999"
+        data="53110865 1191182336 3 2901 1065353216 0 7521 0 7521 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"
+        text="" />
+    <item_instance guid="99999994" owner_guid="99999"
+        data="53111642 1191182336 3 12225 1065353216 0 7521 0 7521 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 25 25 0 0"
+        text="" />
+
+    <character_reputation guid="99999" faction="21" standing="500" flags="65" />
+    <character_reputation guid="99999" faction="46" standing="0" flags="4" />
+    <character_reputation guid="99999" faction="47" standing="7629" flags="273" />
+
+    <character_skills guid="99999" skill="43" value="42" max="95" />
+    <character_skills guid="99999" skill="45" value="95" max="95" />
+    <character_skills guid="99999" skill="51" value="1" max="1" />
+    <character_skills guid="99999" skill="55" value="1" max="95" />
+    <character_skills guid="99999" skill="95" value="89" max="95" />
+
+    <character_spell guid="99999" spell="136" active="1" disabled="0" />
+    <character_spell guid="99999" spell="227" active="1" disabled="0" />
+
+    <character_queststatus guid="99999" quest="65" status="1" rewarded="1" explored="0" timer="1361017883"
+        mobcount1="0" mobcount2="0" mobcount3="0" mobcount4="0" itemcount1="0" itemcount2="0" itemcount3="0" itemcount4="0"
+        itemcount5="0" itemcount6="0" />
+    <character_queststatus guid="99999" quest="121" status="1" rewarded="1" explored="0" timer="1361019238"
+        mobcount1="0" mobcount2="0" mobcount3="0" mobcount4="0" itemcount1="0" itemcount2="0" itemcount3="0" itemcount4="0"
+        itemcount5="0" itemcount6="0" />
+    <character_queststatus guid="99999" quest="132" status="1" rewarded="1" explored="0" timer="1361018569"
+        mobcount1="0" mobcount2="0" mobcount3="0" mobcount4="0" itemcount1="0" itemcount2="0" itemcount3="0" itemcount4="0"
+        itemcount5="0" itemcount6="0" />
+
+</dataset>
