@@ -9,6 +9,7 @@ import org.playerbot.ai.db.DbException;
 import org.playerbot.ai.db.JdbcDatabase;
 import org.playerbot.ai.db.JdbcDatabase.QueryBuilder;
 import org.playerbot.ai.entity.Character;
+import org.playerbot.ai.entity.CharacterAchievement;
 import org.playerbot.ai.entity.CharacterHomebind;
 import org.playerbot.ai.entity.CharacterInventory;
 import org.playerbot.ai.entity.CharacterPet;
@@ -96,6 +97,13 @@ public class UpdateCommand extends AbstractCommand {
                         annotationProcessor.getTableName());
             }
         });
+
+        merge(character, CharacterAchievement.class, "achievement", "achievements", new MergeCondition<CharacterAchievement>() {
+            @Override
+            public boolean apply(Map<Long, CharacterAchievement> existing, CharacterAchievement element) {
+                return !existing.containsKey(element.getAchievement());
+            }
+        });
     }
 
     private interface MergeCondition<T> {
@@ -116,13 +124,15 @@ public class UpdateCommand extends AbstractCommand {
         merge(character, type, valueField, collectionField, mergeOnlyIf, existing);
     }
 
+    @SuppressWarnings("unchecked")
     private <T> void merge(Character character, Class<T> type, String valueField, String collectionField,
             MergeCondition<T> mergeOnlyIf, Map<Long, T> existing) {
         ReflectUtils utils = ReflectUtils.getInstance();
         AnnotationProcessor annotationProcessor = new AnnotationProcessor(type, version);
-        for (T element : (Iterable<T>) utils.getFieldValue(character, collectionField)) {
-            Long key = (Long) utils.getFieldValue(element, valueField);
+        if (!annotationProcessor.isEnabled())
+            return;
 
+        for (T element : (Iterable<T>) utils.getFieldValue(character, collectionField)) {
             if (mergeOnlyIf.apply(existing, element)) {
                 utils.setFieldValue(element, "guid", character.getGuid());
 

@@ -6,6 +6,7 @@ import org.playerbot.ai.db.DbException;
 import org.playerbot.ai.db.JdbcDatabase;
 import org.playerbot.ai.db.JdbcDatabase.QueryBuilder;
 import org.playerbot.ai.entity.Character;
+import org.playerbot.ai.entity.CharacterAchievement;
 import org.playerbot.ai.entity.CharacterHomebind;
 import org.playerbot.ai.entity.CharacterInventory;
 import org.playerbot.ai.entity.CharacterPet;
@@ -46,6 +47,7 @@ public class SelectCommand extends AbstractCommand {
         character.setSkills(database.select(CharacterSkill.class, character.getGuid()));
         character.setQuests(database.select(CharacterQuest.class, character.getGuid()));
         character.setTalents(database.select(CharacterTalent.class, character.getGuid()));
+        character.setAchievements(database.select(CharacterAchievement.class, character.getGuid()));
 
         return character;
     }

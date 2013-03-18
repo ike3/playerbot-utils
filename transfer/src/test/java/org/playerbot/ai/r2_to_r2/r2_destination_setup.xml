@@ -75,4 +75,6 @@
     <character_talent guid="99999" talent_id="1343" current_rank="1" spec="0"/>
     <character_talent guid="99999" talent_id="1344" current_rank="4" spec="0"/>
 
+    <character_achievement guid="99999" achievement="7" date="1359257037"/>
+
 </dataset>

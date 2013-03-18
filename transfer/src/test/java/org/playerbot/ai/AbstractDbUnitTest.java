@@ -97,6 +97,10 @@ public abstract class AbstractDbUnitTest extends AbstractTest {
         checkTable("character_talent",
                 "SELECT t.* FROM character_talent t INNER JOIN characters c ON c.guid = t.guid WHERE c.name = 'TestChar' ORDER BY t.talent_id",
                 "guid");
+
+        checkTable("character_achievement",
+                "SELECT t.* FROM character_achievement t INNER JOIN characters c ON c.guid = t.guid WHERE c.name = 'TestChar' ORDER BY t.achievement",
+                "guid");
     }
 
     private void checkTable(String tableName, String sql, String... ignoreColumns) throws Exception {

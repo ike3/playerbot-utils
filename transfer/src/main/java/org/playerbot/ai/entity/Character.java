@@ -132,6 +132,9 @@ public class Character {
     @Transient
     private List<CharacterTalent> talents = new ArrayList<CharacterTalent>();
 
+    @Transient
+    private List<CharacterAchievement> achievements = new ArrayList<CharacterAchievement>();
+
     public Long getGuid() {
         return guid;
     }
@@ -756,4 +759,11 @@ public class Character {
         this.talents = talents;
     }
 
+    public List<CharacterAchievement> getAchievements() {
+        return achievements;
+    }
+
+    public void setAchievements(List<CharacterAchievement> achievements) {
+        this.achievements = achievements;
+    }
 }

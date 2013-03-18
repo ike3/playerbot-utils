@@ -27,7 +27,7 @@
     </logger>
 
     <logger name="jdbc">
-        <level value="debug" />
+        <level value="warn" />
         <appender-ref ref="console" />
     </logger>
 
