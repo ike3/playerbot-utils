@@ -76,4 +76,7 @@
     <character_achievement guid="99999" achievement="121" date="1359275725"/>
     <character_achievement guid="99999" achievement="126" date="1359262662"/>
 
+    <character_glyphs guid="99999" spec="0" slot="0" glyph="366"/>
+    <character_glyphs guid="99999" spec="0" slot="1" glyph="440"/>
+
 </dataset>

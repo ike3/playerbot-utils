@@ -10,6 +10,7 @@ import org.playerbot.ai.db.JdbcDatabase;
 import org.playerbot.ai.db.JdbcDatabase.QueryBuilder;
 import org.playerbot.ai.entity.Character;
 import org.playerbot.ai.entity.CharacterAchievement;
+import org.playerbot.ai.entity.CharacterGlyph;
 import org.playerbot.ai.entity.CharacterHomebind;
 import org.playerbot.ai.entity.CharacterInventory;
 import org.playerbot.ai.entity.CharacterPet;
@@ -43,6 +44,7 @@ public class UpdateCommand extends AbstractCommand {
             insertPets(character);
             insertInventory(character);
             insertTalents(character);
+            insertGlyphs(character);
         }
 
         character.setGuid(guid);
@@ -193,6 +195,13 @@ public class UpdateCommand extends AbstractCommand {
         for (CharacterTalent talent : character.getTalents()) {
             talent.setGuid(character.getGuid());
             database.insert(CharacterTalent.class, talent);
+        }
+    }
+
+    private void insertGlyphs(Character character) {
+        for (CharacterGlyph glyph : character.getGlyphs()) {
+            glyph.setGuid(character.getGuid());
+            database.insert(CharacterGlyph.class, glyph);
         }
     }
 }

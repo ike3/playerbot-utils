@@ -135,6 +135,9 @@ public class Character {
     @Transient
     private List<CharacterAchievement> achievements = new ArrayList<CharacterAchievement>();
 
+    @Transient
+    private List<CharacterGlyph> glyphs = new ArrayList<CharacterGlyph>();
+
     public Long getGuid() {
         return guid;
     }
@@ -766,4 +769,13 @@ public class Character {
     public void setAchievements(List<CharacterAchievement> achievements) {
         this.achievements = achievements;
     }
+
+    public List<CharacterGlyph> getGlyphs() {
+        return glyphs;
+    }
+
+    public void setGlyphs(List<CharacterGlyph> glyphs) {
+        this.glyphs = glyphs;
+    }
+
 }
