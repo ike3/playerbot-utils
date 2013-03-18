@@ -129,6 +129,9 @@ public class Character {
     @Transient
     private List<CharacterQuest> quests = new ArrayList<CharacterQuest>();
 
+    @Transient
+    private List<CharacterTalent> talents = new ArrayList<CharacterTalent>();
+
     public Long getGuid() {
         return guid;
     }
@@ -743,6 +746,14 @@ public class Character {
 
     public void setQuests(List<CharacterQuest> quests) {
         this.quests = quests;
+    }
+
+    public List<CharacterTalent> getTalents() {
+        return talents;
+    }
+
+    public void setTalents(List<CharacterTalent> talents) {
+        this.talents = talents;
     }
 
 }

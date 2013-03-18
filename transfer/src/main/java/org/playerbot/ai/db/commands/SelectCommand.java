@@ -13,6 +13,7 @@ import org.playerbot.ai.entity.CharacterQuest;
 import org.playerbot.ai.entity.CharacterReputation;
 import org.playerbot.ai.entity.CharacterSkill;
 import org.playerbot.ai.entity.CharacterSpell;
+import org.playerbot.ai.entity.CharacterTalent;
 import org.playerbot.ai.entity.ItemInstance;
 
 public class SelectCommand extends AbstractCommand {
@@ -44,6 +45,7 @@ public class SelectCommand extends AbstractCommand {
         character.setSpells(database.select(CharacterSpell.class, character.getGuid()));
         character.setSkills(database.select(CharacterSkill.class, character.getGuid()));
         character.setQuests(database.select(CharacterQuest.class, character.getGuid()));
+        character.setTalents(database.select(CharacterTalent.class, character.getGuid()));
 
         return character;
     }

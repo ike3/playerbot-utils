@@ -16,6 +16,7 @@ import org.playerbot.ai.entity.CharacterQuest;
 import org.playerbot.ai.entity.CharacterReputation;
 import org.playerbot.ai.entity.CharacterSkill;
 import org.playerbot.ai.entity.CharacterSpell;
+import org.playerbot.ai.entity.CharacterTalent;
 import org.playerbot.ai.entity.ItemInstance;
 import org.playerbot.ai.entity.Spell;
 
@@ -40,6 +41,7 @@ public class UpdateCommand extends AbstractCommand {
             insertHomebind(character, guid);
             insertPets(character);
             insertInventory(character);
+            insertTalents(character);
         }
 
         character.setGuid(guid);
@@ -174,6 +176,13 @@ public class UpdateCommand extends AbstractCommand {
             pet.setOwner(character.getGuid());
             pet.setId(firstPetId++);
             database.insert(CharacterPet.class, pet);
+        }
+    }
+
+    private void insertTalents(Character character) {
+        for (CharacterTalent talent : character.getTalents()) {
+            talent.setGuid(character.getGuid());
+            database.insert(CharacterTalent.class, talent);
         }
     }
 }

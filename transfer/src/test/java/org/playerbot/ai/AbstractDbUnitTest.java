@@ -1,5 +1,7 @@
 package org.playerbot.ai;
 
+import java.util.Arrays;
+
 import org.dbunit.Assertion;
 import org.dbunit.DefaultDatabaseTester;
 import org.dbunit.IDatabaseTester;
@@ -91,9 +93,16 @@ public abstract class AbstractDbUnitTest extends AbstractTest {
         checkTable("character_queststatus",
                 "SELECT t.* FROM character_queststatus t INNER JOIN characters c ON c.guid = t.guid WHERE c.name = 'TestChar' ORDER BY t.quest",
                 "guid");
+
+        checkTable("character_talent",
+                "SELECT t.* FROM character_talent t INNER JOIN characters c ON c.guid = t.guid WHERE c.name = 'TestChar' ORDER BY t.talent_id",
+                "guid");
     }
 
     private void checkTable(String tableName, String sql, String... ignoreColumns) throws Exception {
+        if (!Arrays.asList(expectedDataSet.getTableNames()).contains(tableName))
+            return;
+
         destinationConnection = getConnection(getDestinationConnectionName());
         ITable actualData = destinationConnection.createQueryTable(tableName,
                 sql);

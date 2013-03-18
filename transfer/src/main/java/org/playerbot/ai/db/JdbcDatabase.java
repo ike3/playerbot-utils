@@ -2,6 +2,7 @@ package org.playerbot.ai.db;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.dbcp.BasicDataSource;
@@ -72,6 +73,8 @@ public abstract class JdbcDatabase implements Database {
 
     public <T> List<T> select(final Class<T> type, Object[] params, QueryBuilder queryBuilder) {
         final AnnotationProcessor annotationProcessor = new AnnotationProcessor(type, config.getVersion());
+        if (!annotationProcessor.isEnabled())
+            return new ArrayList<T>();
 
         List<T> list = jdbcTemplate.query(queryBuilder.build(annotationProcessor), params, new RowMapper<T>() {
 
@@ -91,6 +94,9 @@ public abstract class JdbcDatabase implements Database {
 
     public <T> void insert(Class<T> type, T object) {
         final AnnotationProcessor annotationProcessor = new AnnotationProcessor(type, config.getVersion());
+        if (!annotationProcessor.isEnabled())
+            return;
+
         String[] columns = annotationProcessor.getColumnNames();
         String sql = String.format("INSERT INTO %s (%s) VALUES (%s)",
                 annotationProcessor.getTableName(),
@@ -118,5 +124,14 @@ public abstract class JdbcDatabase implements Database {
 
     public DatabaseConfiguration getConfig() {
         return config;
+    }
+
+    public void delete(Class<?> type, Object key) {
+        AnnotationProcessor annotationProcessor = new AnnotationProcessor(type, config.getVersion());
+        if (!annotationProcessor.isEnabled())
+            return;
+
+        jdbcTemplate.update(String.format("DELETE FROM %s WHERE %s = ?", annotationProcessor.getTableName(),
+                annotationProcessor.getKey()), key);
     }
 }

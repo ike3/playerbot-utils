@@ -21,8 +21,13 @@
         <appender-ref ref="console" />
     </logger>
 
-    <logger name="jdbc">
+    <logger name="org.dbunit">
         <level value="info" />
+        <appender-ref ref="console" />
+    </logger>
+
+    <logger name="jdbc">
+        <level value="debug" />
         <appender-ref ref="console" />
     </logger>
 

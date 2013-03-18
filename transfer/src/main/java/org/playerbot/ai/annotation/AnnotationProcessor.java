@@ -92,4 +92,13 @@ public class AnnotationProcessor {
     public Object read(Object object, ColumnMeta column) {
         return ReflectUtils.getInstance().getFieldValue(object, column.getField().getName());
     }
+
+    public boolean isEnabled() {
+        For ver = type.getAnnotation(For.class);
+        if (ver != null) {
+            List<String> asList = Arrays.asList(ver.value());
+            return asList.contains("*") || asList.contains(version);
+        }
+        return true;
+    }
 }
