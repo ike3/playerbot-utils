@@ -9,7 +9,7 @@ import org.playerbot.ai.annotation.Table;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @Table("character_glyphs")
-@For("r2")
+@For({"r2", "mangostwo"})
 public class CharacterGlyph {
     @Key
     private long guid;

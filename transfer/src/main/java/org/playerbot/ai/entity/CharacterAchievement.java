@@ -9,7 +9,7 @@ import org.playerbot.ai.annotation.Table;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @Table("character_achievement")
-@For("r2")
+@For({"r2", "mangostwo"})
 public class CharacterAchievement {
     @Key
     private long guid;
