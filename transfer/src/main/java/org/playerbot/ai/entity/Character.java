@@ -138,6 +138,9 @@ public class Character {
     @Transient
     private List<CharacterGlyph> glyphs = new ArrayList<CharacterGlyph>();
 
+    @Transient
+    private List<CharacterAction> actions = new ArrayList<CharacterAction>();
+
     public Long getGuid() {
         return guid;
     }
@@ -776,6 +779,14 @@ public class Character {
 
     public void setGlyphs(List<CharacterGlyph> glyphs) {
         this.glyphs = glyphs;
+    }
+
+    public List<CharacterAction> getActions() {
+        return actions;
+    }
+
+    public void setActions(List<CharacterAction> actions) {
+        this.actions = actions;
     }
 
 }

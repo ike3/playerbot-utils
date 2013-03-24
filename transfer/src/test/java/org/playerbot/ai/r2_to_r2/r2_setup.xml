@@ -85,4 +85,8 @@
     <character_glyphs guid="99999" spec="0" slot="0" glyph="366"/>
     <character_glyphs guid="99999" spec="0" slot="1" glyph="440"/>
 
+    <character_action guid="99999" spec="0" button="0" action="1" type="65"/>
+    <character_action guid="99999" spec="0" button="1" action="14261" type="0"/>
+    <character_action guid="99999" spec="0" button="2" action="2" type="65"/>
+
 </dataset>
