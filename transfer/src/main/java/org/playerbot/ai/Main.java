@@ -7,6 +7,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.WordUtils;
 import org.playerbot.ai.config.Configuration;
 import org.playerbot.ai.db.Database;
+import org.playerbot.ai.db.DbException;
 import org.playerbot.ai.db.MangosDatabase;
 import org.playerbot.ai.db.XmlDatabase;
 import org.playerbot.ai.entity.Character;
@@ -71,12 +72,23 @@ public class Main {
     }
 
     void run(String characterName) throws Exception {
+        Character destinationCharacter = null;
+
         if ("replace".equals(mode) || "delete".equals(mode)) {
+            destinationCharacter = destination.select(characterName);
             destination.delete(characterName);
         }
 
         if ("replace".equals(mode) || "update".equals(mode)) {
             Character character = source.select(characterName);
+            if (character == null) {
+                throw new DbException("Character " + characterName + " not found");
+            }
+
+            if (destinationCharacter != null) {
+                character.setAccount(destinationCharacter.getAccount());
+            }
+
             linkColumns(character);
             destination.update(character);
         }

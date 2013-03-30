@@ -28,7 +28,7 @@ public class SelectCommand extends AbstractCommand {
     public Character select(String characterName) throws DbException {
         Character character = database.selectOne(Character.class, characterName);
         if (character == null) {
-            throw new DbException("Character " + characterName + " not found");
+            return null;
         }
 
         character.setHomebind(database.selectOne(CharacterHomebind.class, character.getGuid()));
