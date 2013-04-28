@@ -12,6 +12,17 @@
         <maxSkill>150</maxSkill>
     </database>
     <database>
+        <name>r2_Wetlands</name>
+        <version>r2</version>
+        <url>jdbc:mysql://localhost:3306/r2_characters_29</url>
+        <driver>com.mysql.jdbc.Driver</driver>
+        <username>root</username>
+        <password>1</password>
+        <worldDbName>r2_world</worldDbName>
+        <maxLevel>29</maxLevel>
+        <maxSkill>225</maxSkill>
+    </database>
+    <database>
         <name>mangostwo_Eversong</name>
         <version>mangostwo</version>
         <url>jdbc:mysql://localhost:3306/mangostwo_characters_19</url>
