@@ -102,6 +102,10 @@ public abstract class AbstractDbUnitTest extends AbstractTest {
                 "SELECT t.* FROM character_achievement t INNER JOIN characters c ON c.guid = t.guid WHERE c.name = 'TestChar' ORDER BY t.achievement",
                 "guid");
 
+        checkTable("character_achievement_progress",
+                "SELECT t.* FROM character_achievement_progress t INNER JOIN characters c ON c.guid = t.guid WHERE c.name = 'TestChar' ORDER BY t.criteria",
+                "guid");
+
         checkTable("character_glyphs",
                 "SELECT t.* FROM character_glyphs t INNER JOIN characters c ON c.guid = t.guid WHERE c.name = 'TestChar' ORDER BY t.glyph",
                 "guid");

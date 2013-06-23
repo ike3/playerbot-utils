@@ -10,6 +10,7 @@ import org.playerbot.ai.db.JdbcDatabase;
 import org.playerbot.ai.db.JdbcDatabase.QueryBuilder;
 import org.playerbot.ai.entity.Character;
 import org.playerbot.ai.entity.CharacterAchievement;
+import org.playerbot.ai.entity.CharacterAchievementProgress;
 import org.playerbot.ai.entity.CharacterAction;
 import org.playerbot.ai.entity.CharacterGlyph;
 import org.playerbot.ai.entity.CharacterHomebind;
@@ -108,6 +109,15 @@ public class UpdateCommand extends AbstractCommand {
                 return !existing.containsKey(element.getAchievement());
             }
         });
+
+        merge(character, CharacterAchievementProgress.class, "criteria", "achievementProgress", new MergeCondition<CharacterAchievementProgress>() {
+            @Override
+            public boolean apply(Map<Long, CharacterAchievementProgress> existing, CharacterAchievementProgress element) {
+                return !existing.containsKey(element.getCriteria()) ||
+                        element.getCounter() > existing.get(element.getCriteria()).getCounter();
+            }
+        });
+
     }
 
     private interface MergeCondition<T> {

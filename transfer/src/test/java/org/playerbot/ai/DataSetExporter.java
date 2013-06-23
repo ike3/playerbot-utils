@@ -44,6 +44,8 @@ public class DataSetExporter extends AbstractTest {
                 format("SELECT t.* FROM character_talent t INNER JOIN characters c ON c.guid = t.guid WHERE c.name = '$character'"));
         partialDataSet.addTable("character_achievement",
                 format("SELECT t.* FROM character_achievement t INNER JOIN characters c ON c.guid = t.guid WHERE c.name = '$character'"));
+        partialDataSet.addTable("character_achievement_progress",
+                format("SELECT t.* FROM character_achievement_progress t INNER JOIN characters c ON c.guid = t.guid WHERE c.name = '$character'"));
         partialDataSet.addTable("character_glyphs",
                 format("SELECT t.* FROM character_glyphs t INNER JOIN characters c ON c.guid = t.guid WHERE c.name = '$character'"));
         partialDataSet.addTable("character_action",

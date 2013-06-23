@@ -76,6 +76,10 @@
     <character_achievement guid="99999" achievement="121" date="1359275725"/>
     <character_achievement guid="99999" achievement="126" date="1359262662"/>
 
+    <character_achievement_progress guid="99999" criteria="11" counter="5" date="1359262662"/>
+    <character_achievement_progress guid="99999" criteria="14" counter="2" date="1359162162"/>
+    <character_achievement_progress guid="99999" criteria="18" counter="2" date="1359162162"/>
+
     <character_glyphs guid="99999" spec="0" slot="0" glyph="366"/>
     <character_glyphs guid="99999" spec="0" slot="1" glyph="440"/>
 

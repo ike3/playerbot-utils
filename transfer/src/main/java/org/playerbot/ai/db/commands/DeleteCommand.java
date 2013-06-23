@@ -3,6 +3,7 @@ package org.playerbot.ai.db.commands;
 import org.playerbot.ai.db.DbException;
 import org.playerbot.ai.db.JdbcDatabase;
 import org.playerbot.ai.entity.CharacterAchievement;
+import org.playerbot.ai.entity.CharacterAchievementProgress;
 import org.playerbot.ai.entity.CharacterAction;
 import org.playerbot.ai.entity.CharacterGlyph;
 import org.playerbot.ai.entity.CharacterHomebind;
@@ -31,7 +32,7 @@ public class DeleteCommand extends AbstractCommand {
         Class<?>[] types = new Class<?>[] { CharacterReputation.class, CharacterSpell.class,
                 CharacterSkill.class, CharacterQuest.class, CharacterHomebind.class, CharacterInventory.class,
                 ItemInstance.class, CharacterPet.class, CharacterTalent.class, CharacterAchievement.class,
-                CharacterGlyph.class, CharacterAction.class };
+                CharacterGlyph.class, CharacterAction.class, CharacterAchievementProgress.class };
 
         database.delete(org.playerbot.ai.entity.Character.class, characterName);
         for (Class<?> type : types) {

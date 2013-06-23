@@ -77,6 +77,9 @@
 
     <character_achievement guid="99999" achievement="7" date="1359257037"/>
 
+    <character_achievement_progress guid="99999" criteria="10" counter="5" date="1359262662"/>
+    <character_achievement_progress guid="99999" criteria="14" counter="7" date="1359162162"/>
+
     <character_glyphs guid="99999" spec="0" slot="0" glyph="366"/>
 
     <character_action guid="99999" spec="0" button="0" action="1" type="65"/>
