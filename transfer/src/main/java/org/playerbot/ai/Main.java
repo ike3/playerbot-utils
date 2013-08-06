@@ -2,6 +2,9 @@ package org.playerbot.ai;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.WordUtils;
@@ -52,13 +55,26 @@ public class Main {
     void run() throws Exception {
         connect();
 
-        for (String characterName : characterNames) {
-            try {
-                run(characterName);
-            } catch (Exception e) {
-                reportError(e);
-            }
+        ExecutorService es = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() + 1);
+        List<Future<?>> futures = new ArrayList<Future<?>>();
+        for (final String characterName : characterNames) {
+            futures.add(es.submit(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Main.this.run(characterName);
+                    } catch (Exception e) {
+                        reportError(e);
+                    }
+                }
+            }));
         }
+
+        for (Future<?> future : futures) {
+            future.get();
+        }
+
+        es.shutdown();
     }
 
     private static void reportError(Exception e) {
