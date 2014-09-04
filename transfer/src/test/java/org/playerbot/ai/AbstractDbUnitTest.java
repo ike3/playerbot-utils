@@ -60,6 +60,9 @@ public abstract class AbstractDbUnitTest extends AbstractTest {
     }
 
     protected void assertDestinationValid() throws Exception {
+        assertDestinationValid(false);
+    }
+    protected void assertDestinationValid(boolean tc) throws Exception {
         checkTable("characters", "SELECT * FROM characters WHERE name = 'TestChar'", "guid");
 
         checkTable("character_homebind",
@@ -94,6 +97,12 @@ public abstract class AbstractDbUnitTest extends AbstractTest {
                 "SELECT t.* FROM character_queststatus t INNER JOIN characters c ON c.guid = t.guid WHERE c.name = 'TestChar' ORDER BY t.quest",
                 "guid");
 
+        if (tc)
+        checkTable("character_queststatus_rewarded",
+                "SELECT t.* FROM character_queststatus_rewarded t INNER JOIN characters c ON c.guid = t.guid WHERE c.name = 'TestChar' ORDER BY t.quest",
+                "guid");
+
+        if (!tc)
         checkTable("character_talent",
                 "SELECT t.* FROM character_talent t INNER JOIN characters c ON c.guid = t.guid WHERE c.name = 'TestChar' ORDER BY t.talent_id",
                 "guid");
@@ -106,6 +115,7 @@ public abstract class AbstractDbUnitTest extends AbstractTest {
                 "SELECT t.* FROM character_achievement_progress t INNER JOIN characters c ON c.guid = t.guid WHERE c.name = 'TestChar' ORDER BY t.criteria",
                 "guid");
 
+        if (!tc)
         checkTable("character_glyphs",
                 "SELECT t.* FROM character_glyphs t INNER JOIN characters c ON c.guid = t.guid WHERE c.name = 'TestChar' ORDER BY t.glyph",
                 "guid");

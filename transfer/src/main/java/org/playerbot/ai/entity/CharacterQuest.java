@@ -14,6 +14,7 @@ public class CharacterQuest {
     private long guid;
     private long quest;
     private long status;
+    @For({"r2", "mangosone", "mangoszero"})
     private boolean rewarded;
     private boolean explored;
     private long timer;
@@ -157,5 +158,4 @@ public class CharacterQuest {
     public void setItemcount6(long itemcount6) {
         this.itemcount6 = itemcount6;
     }
-
 }

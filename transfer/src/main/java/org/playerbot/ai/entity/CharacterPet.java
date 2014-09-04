@@ -4,6 +4,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 
 import org.playerbot.ai.annotation.Column;
+import org.playerbot.ai.annotation.Columns;
 import org.playerbot.ai.annotation.For;
 import org.playerbot.ai.annotation.Key;
 import org.playerbot.ai.annotation.Table;
@@ -21,15 +22,16 @@ public class CharacterPet {
     private long level;
     private long exp;
     @For("r2")
+    @Columns(@Column(value = "Reactstate", version = "r2"))
     private long Reactstate;
     @For("mangoszero")
-    @Column("Reactstate")
+    @Columns(@Column(value = "Reactstate", version = "mangoszero"))
     private boolean ReactstateBoolean;
     private String name;
     @For("r2")
     private long renamed;
     @For("mangoszero")
-    @Column("renamed")
+    @Columns(@Column(value = "renamed", version = "mangoszero"))
     private boolean renamedBoolean;
 
     private long slot;

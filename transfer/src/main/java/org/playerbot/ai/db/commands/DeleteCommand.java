@@ -10,6 +10,7 @@ import org.playerbot.ai.entity.CharacterHomebind;
 import org.playerbot.ai.entity.CharacterInventory;
 import org.playerbot.ai.entity.CharacterPet;
 import org.playerbot.ai.entity.CharacterQuest;
+import org.playerbot.ai.entity.CharacterQuestRewarded;
 import org.playerbot.ai.entity.CharacterReputation;
 import org.playerbot.ai.entity.CharacterSkill;
 import org.playerbot.ai.entity.CharacterSpell;
@@ -30,7 +31,7 @@ public class DeleteCommand extends AbstractCommand {
         }
 
         Class<?>[] types = new Class<?>[] { CharacterReputation.class, CharacterSpell.class,
-                CharacterSkill.class, CharacterQuest.class, CharacterHomebind.class, CharacterInventory.class,
+                CharacterSkill.class, CharacterQuest.class, CharacterQuestRewarded.class, CharacterHomebind.class, CharacterInventory.class,
                 ItemInstance.class, CharacterPet.class, CharacterTalent.class, CharacterAchievement.class,
                 CharacterGlyph.class, CharacterAction.class, CharacterAchievementProgress.class };
 

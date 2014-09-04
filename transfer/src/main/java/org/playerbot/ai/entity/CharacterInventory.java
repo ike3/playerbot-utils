@@ -3,6 +3,9 @@ package org.playerbot.ai.entity;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 
+import org.playerbot.ai.annotation.Column;
+import org.playerbot.ai.annotation.Columns;
+import org.playerbot.ai.annotation.For;
 import org.playerbot.ai.annotation.Key;
 import org.playerbot.ai.annotation.Table;
 
@@ -14,6 +17,8 @@ public class CharacterInventory {
     private long bag;
     private long slot;
     private long item;
+    @For("r2")
+    @Columns({@Column(value = "item_template", version = "r2")})
     private long item_template;
 
     public long getGuid() {

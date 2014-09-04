@@ -2,12 +2,14 @@ package org.playerbot.ai.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.playerbot.ai.annotation.Column;
+import org.playerbot.ai.annotation.Columns;
 import org.playerbot.ai.annotation.For;
 import org.playerbot.ai.annotation.Key;
 import org.playerbot.ai.annotation.Table;
@@ -16,13 +18,13 @@ import org.playerbot.ai.annotation.Transient;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @Table("characters")
-public class Character {
+public class Character implements PostProcessor {
     private Long guid;
     private Long account;
     @Key
     private String name;
     private Long race;
-    @Column("class")
+    @Columns(@Column(value = "class", version = "*"))
     private Long class1;
     private Long gender;
     private Long level;
@@ -59,23 +61,23 @@ public class Character {
     private Long zone;
     private Long death_expire_time;
     private String taxi_path;
-    @For("r2")
+    @For({"r2", "tc"})
     private Long arenaPoints;
-    @For("r2")
+    @For({"r2", "tc"})
     private Long totalHonorPoints;
-    @For("r2")
+    @For({"r2", "tc"})
     private Long todayHonorPoints;
-    @For("r2")
+    @For({"r2", "tc"})
     private Long yesterdayHonorPoints;
-    @For("r2")
+    @For({"r2", "tc"})
     private Long totalKills;
-    @For("r2")
+    @For({"r2", "tc"})
     private Long todayKills;
-    @For("r2")
+    @For({"r2", "tc"})
     private Long yesterdayKills;
-    @For("r2")
+    @For({"r2", "tc"})
     private Long chosenTitle;
-    @For("r2")
+    @For({"r2", "tc"})
     private Long knownCurrencies;
     private Long watchedFaction;
     private Long drunk;
@@ -85,21 +87,21 @@ public class Character {
     private Long power3;
     private Long power4;
     private Long power5;
-    @For("r2")
+    @For({"r2", "tc"})
     private Long power6;
-    @For("r2")
+    @For({"r2", "tc"})
     private Long power7;
-    @For("r2")
+    @For({"r2", "tc"})
     private Long specCount;
-    @For("r2")
+    @For({"r2", "tc"})
     private Long activeSpec;
     private String exploredZones;
     private String equipmentCache;
     private Long ammoId;
-    @For("r2")
+    @For({"r2", "tc"})
     private String knownTitles;
     private Long actionBars;
-    @For("r2")
+    @For({"r2", "tc"})
     private Long grantableLevels;
     private Long deleteInfos_Account;
     private String deleteInfos_Name;
@@ -128,6 +130,9 @@ public class Character {
 
     @Transient
     private List<CharacterQuest> quests = new ArrayList<CharacterQuest>();
+
+    @Transient
+    private List<CharacterQuestRewarded> questRewarded = new ArrayList<CharacterQuestRewarded>();
 
     @Transient
     private List<CharacterTalent> talents = new ArrayList<CharacterTalent>();
@@ -798,6 +803,31 @@ public class Character {
 
     public void setActions(List<CharacterAction> actions) {
         this.actions = actions;
+    }
+
+    public List<CharacterQuestRewarded> getQuestRewarded() {
+        return questRewarded;
+    }
+
+    public void setQuestRewarded(List<CharacterQuestRewarded> questRewarded) {
+        this.questRewarded = questRewarded;
+    }
+
+    @Override
+    public void postProcess() {
+        if (questRewarded.isEmpty()) {
+            for (ListIterator<CharacterQuest> iterator = quests.listIterator(); iterator.hasNext();) {
+                CharacterQuest quest = iterator.next();
+                if (quest.isRewarded()) {
+                    CharacterQuestRewarded rewarded = new CharacterQuestRewarded();
+                    rewarded.setActive(1);
+                    rewarded.setGuid(quest.getGuid());
+                    rewarded.setQuest(quest.getQuest());
+                    questRewarded.add(rewarded);
+                    iterator.remove();
+                }
+            }
+        }
     }
 
 }

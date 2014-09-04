@@ -1,5 +1,7 @@
 package org.playerbot.ai.db.commands;
 
+import static org.playerbot.ai.Utils.asMap;
+
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
@@ -17,14 +19,13 @@ import org.playerbot.ai.entity.CharacterHomebind;
 import org.playerbot.ai.entity.CharacterInventory;
 import org.playerbot.ai.entity.CharacterPet;
 import org.playerbot.ai.entity.CharacterQuest;
+import org.playerbot.ai.entity.CharacterQuestRewarded;
 import org.playerbot.ai.entity.CharacterReputation;
 import org.playerbot.ai.entity.CharacterSkill;
 import org.playerbot.ai.entity.CharacterSpell;
 import org.playerbot.ai.entity.CharacterTalent;
 import org.playerbot.ai.entity.ItemInstance;
 import org.playerbot.ai.entity.Spell;
-
-import static org.playerbot.ai.Utils.asMap;
 
 public class UpdateCommand extends AbstractCommand {
     private final Map<Long, Spell> availableSpells;
@@ -100,6 +101,13 @@ public class UpdateCommand extends AbstractCommand {
                 return String.format("SELECT %s FROM %s WHERE status = 1 AND guid = ?",
                         StringUtils.join(annotationProcessor.getColumnNames(), ","),
                         annotationProcessor.getTableName());
+            }
+        });
+
+        merge(character, CharacterQuestRewarded.class, "quest", "questRewarded", new MergeCondition<CharacterQuestRewarded>() {
+            @Override
+            public boolean apply(Map<Long, CharacterQuestRewarded> existing, CharacterQuestRewarded element) {
+                return !existing.containsKey(element.getQuest());
             }
         });
 

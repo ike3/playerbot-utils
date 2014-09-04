@@ -10,7 +10,7 @@ public class DataSetExporter extends AbstractTest {
 
     private static final String CONNECTION_NAME = "r2_Eversong";
     //private static final String CONNECTION_NAME = "mangoszero_Crystalsong";
-    private static final String CHARACTER_NAME = "Eleya";
+    private static final String CHARACTER_NAME = "Aelas";
 
     public static void main(String[] args) throws Exception {
         DataSetExporter exporter = new DataSetExporter();

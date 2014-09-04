@@ -3,6 +3,8 @@ package org.playerbot.ai.entity;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 
+import org.playerbot.ai.annotation.Column;
+import org.playerbot.ai.annotation.Columns;
 import org.playerbot.ai.annotation.Key;
 import org.playerbot.ai.annotation.Table;
 
@@ -11,10 +13,15 @@ import org.playerbot.ai.annotation.Table;
 public class CharacterHomebind {
     @Key
     private long guid;
+    @Columns({@Column(value = "map", version = "r2"), @Column(value = "mapId", version = "tc")})
     private long map;
+    @Columns({@Column(value = "zone", version = "r2"), @Column(value = "zoneId", version = "tc")})
     private long zone;
+    @Columns({@Column(value = "position_x", version = "r2"), @Column(value = "posX", version = "tc")})
     private float position_x;
+    @Columns({@Column(value = "position_y", version = "r2"), @Column(value = "posY", version = "tc")})
     private float position_y;
+    @Columns({@Column(value = "position_z", version = "r2"), @Column(value = "posZ", version = "tc")})
     private float position_z;
 
     public long getGuid() {

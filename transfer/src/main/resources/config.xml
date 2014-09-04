@@ -89,17 +89,6 @@
         <maxSkill>150</maxSkill>
     </database>
     <database>
-        <name>r2_Crystalsong</name>
-        <version>r2</version>
-        <url>jdbc:mysql://localhost:3306/r2_characters</url>
-        <driver>com.mysql.jdbc.Driver</driver>
-        <username>root</username>
-        <password>1</password>
-        <worldDbName>r2_world</worldDbName>
-        <maxLevel>80</maxLevel>
-        <maxSkill>450</maxSkill>
-    </database>
-    <database>
         <name>mangoszero_Crystalsong</name>
         <version>mangoszero</version>
         <url>jdbc:mysql://localhost:3306/mangoszero_characters</url>
@@ -121,4 +110,17 @@
         <maxLevel>70</maxLevel>
         <maxSkill>375</maxSkill>
     </database>
+
+    <database>
+        <name>tc_Eversong</name>
+        <version>tc</version>
+        <url>jdbc:mysql://localhost:3306/tc_characters_19</url>
+        <driver>com.mysql.jdbc.Driver</driver>
+        <username>root</username>
+        <password>1</password>
+        <worldDbName>tc_world</worldDbName>
+        <maxLevel>19</maxLevel>
+        <maxSkill>150</maxSkill>
+    </database>
+
 </configuration>

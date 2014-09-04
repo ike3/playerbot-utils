@@ -19,12 +19,39 @@ public class AnnotationProcessor {
 
     public ColumnMeta[] getColumns() {
         Field[] fields = getFields();
-        ColumnMeta[] result = new ColumnMeta[fields.length];
+        List<ColumnMeta> result = new ArrayList<ColumnMeta>();
         for (int i = 0; i < fields.length; i++) {
-            Column column = fields[i].getAnnotation(Column.class);
-            result[i] = new ColumnMeta(fields[i], column != null ? column.value() : fields[i].getName());
+            Columns columns = fields[i].getAnnotation(Columns.class);
+            Column column = findColumnForVersion(columns);
+            result.add(new ColumnMeta(fields[i], column != null ? column.value() : fields[i].getName()));
         }
-        return result;
+        return result.toArray(new ColumnMeta[result.size()]);
+    }
+
+    private Column findColumnForVersion(Columns columns) {
+        if (columns == null) {
+            return null;
+        }
+        for (Column column : columns.value()) {
+            List<String> asList = Arrays.asList(column.version());
+            if (asList.contains("*") || asList.contains(version)) {
+                return column;
+            }
+        }
+        return null;
+    }
+
+    private Table findTableForVersion(Tables tables) {
+        if (tables == null) {
+            return null;
+        }
+        for (Table table : tables.value()) {
+            List<String> asList = Arrays.asList(table.version());
+            if (asList.contains("*") || asList.contains(version)) {
+                return table;
+            }
+        }
+        return null;
     }
 
     public String[] getColumnNames() {
@@ -40,7 +67,7 @@ public class AnnotationProcessor {
         return result;
     }
 
-    public Field[] getFields() {
+    private Field[] getFields() {
         List<Field> result = new ArrayList<Field>();
         for (Field field : type.getDeclaredFields()) {
             if (field.getAnnotation(Transient.class) != null) {
@@ -71,14 +98,28 @@ public class AnnotationProcessor {
     public void apply(Object object, ColumnMeta column, Object value) {
         String fieldName = column.getField().getName();
         try {
-            ReflectUtils.getInstance().setFieldValue(object, fieldName, value);
+            ReflectUtils.getInstance().setFieldValue(object, fieldName, value, true);
         } catch (Exception e) {
-            throw new UnsupportedOperationException(String.format("Error setting field %s to %s", fieldName, value), e);
+            throw new UnsupportedOperationException(String.format("Error setting field %s to %s (%s)",
+                    column.getField().toString(), value, value.getClass().toString()), e);
         }
     }
 
     public String getTableName() {
-        return type.getAnnotation(Table.class).value();
+        Table table = type.getAnnotation(Table.class);
+        if (table != null) {
+            List<String> asList = Arrays.asList(table.version());
+            if (asList.contains("*") || asList.contains(version)) {
+                return table.value();
+            }
+        }
+
+        Tables tables = type.getAnnotation(Tables.class);
+        table = findTableForVersion(tables);
+        if (table == null) {
+            throw new UnsupportedOperationException("No tables found for " + type.toString());
+        }
+        return table.value();
     }
 
     public Object[] read(Object object, ColumnMeta[] columns) {

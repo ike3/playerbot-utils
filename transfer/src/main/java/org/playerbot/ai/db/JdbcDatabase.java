@@ -11,6 +11,7 @@ import org.azeckoski.reflectutils.ReflectUtils;
 import org.playerbot.ai.annotation.AnnotationProcessor;
 import org.playerbot.ai.annotation.ColumnMeta;
 import org.playerbot.ai.config.DatabaseConfiguration;
+import org.playerbot.ai.entity.PostProcessor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -85,6 +86,9 @@ public abstract class JdbcDatabase implements Database {
                 T result = ReflectUtils.getInstance().constructClass(type);
                 for (ColumnMeta column : columns) {
                     annotationProcessor.apply(result, column, rs.getObject(column.getName()));
+                }
+                if (result instanceof PostProcessor) {
+                    ((PostProcessor)result).postProcess();
                 }
                 return result;
             }

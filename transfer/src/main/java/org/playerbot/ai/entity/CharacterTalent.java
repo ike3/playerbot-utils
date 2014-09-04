@@ -13,9 +13,13 @@ import org.playerbot.ai.annotation.Table;
 public class CharacterTalent {
     @Key
     private long guid;
+    @For("r2")
     private long talent_id;
+    @For("r2")
     private long current_rank;
     private long spec;
+    @For("tc")
+    private long spell;
 
     public long getGuid() {
         return guid;
@@ -49,4 +53,11 @@ public class CharacterTalent {
         this.spec = spec;
     }
 
+    public long getSpell() {
+        return spell;
+    }
+
+    public void setSpell(long spell) {
+        this.spell = spell;
+    }
 }
