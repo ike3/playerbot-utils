@@ -9,8 +9,8 @@ import org.playerbot.ai.annotation.Table;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @Table("character_glyphs")
-@For({"r2", "mangostwo"})
-public class CharacterGlyph implements PostProcessor {
+@For({"r2", "mangostwo", "tc"})
+public class CharacterGlyph {
     @Key
     private long guid;
     @For("r2")
@@ -113,11 +113,27 @@ public class CharacterGlyph implements PostProcessor {
         this.glyph6 = glyph6;
     }
 
-    @Override
-    public void postProcess() {
-        if (glyph != 0) {
-            glyph1 = glyph;
+    public void setGlyphByIndex(int index, long glyph) {
+        if (index == 0) {
+            this.glyph = glyph;
+        }
+        else if (index == 1) {
+            this.glyph1 = glyph;
+        }
+        else if (index == 2) {
+            this.glyph2 = glyph;
+        }
+        else if (index == 3) {
+            this.glyph3 = glyph;
+        }
+        else if (index == 4) {
+            this.glyph4 = glyph;
+        }
+        else if (index == 5) {
+            this.glyph5 = glyph;
+        }
+        else if (index == 6) {
+            this.glyph6 = glyph;
         }
     }
-
 }

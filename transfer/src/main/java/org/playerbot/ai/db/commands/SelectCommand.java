@@ -20,7 +20,6 @@ import org.playerbot.ai.entity.CharacterSkill;
 import org.playerbot.ai.entity.CharacterSpell;
 import org.playerbot.ai.entity.CharacterTalent;
 import org.playerbot.ai.entity.ItemInstance;
-import org.playerbot.ai.entity.PostProcessor;
 
 public class SelectCommand extends AbstractCommand {
 
@@ -57,10 +56,6 @@ public class SelectCommand extends AbstractCommand {
         character.setAchievementProgress(database.select(CharacterAchievementProgress.class, character.getGuid()));
         character.setGlyphs(database.select(CharacterGlyph.class, character.getGuid()));
         character.setActions(database.select(CharacterAction.class, character.getGuid()));
-
-        if (character instanceof PostProcessor) {
-            ((PostProcessor)character).postProcess();
-        }
 
         return character;
     }

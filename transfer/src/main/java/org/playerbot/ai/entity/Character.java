@@ -2,7 +2,6 @@ package org.playerbot.ai.entity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -18,7 +17,7 @@ import org.playerbot.ai.annotation.Transient;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @Table("characters")
-public class Character implements PostProcessor {
+public class Character {
     private Long guid;
     private Long account;
     @Key
@@ -812,22 +811,4 @@ public class Character implements PostProcessor {
     public void setQuestRewarded(List<CharacterQuestRewarded> questRewarded) {
         this.questRewarded = questRewarded;
     }
-
-    @Override
-    public void postProcess() {
-        if (questRewarded.isEmpty()) {
-            for (ListIterator<CharacterQuest> iterator = quests.listIterator(); iterator.hasNext();) {
-                CharacterQuest quest = iterator.next();
-                if (quest.isRewarded()) {
-                    CharacterQuestRewarded rewarded = new CharacterQuestRewarded();
-                    rewarded.setActive(1);
-                    rewarded.setGuid(quest.getGuid());
-                    rewarded.setQuest(quest.getQuest());
-                    questRewarded.add(rewarded);
-                    iterator.remove();
-                }
-            }
-        }
-    }
-
 }

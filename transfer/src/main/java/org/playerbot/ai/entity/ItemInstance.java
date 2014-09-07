@@ -1,11 +1,8 @@
 package org.playerbot.ai.entity;
 
-import java.util.Arrays;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 
-import org.apache.commons.lang.StringUtils;
 import org.playerbot.ai.annotation.For;
 import org.playerbot.ai.annotation.Key;
 import org.playerbot.ai.annotation.MaxLength;
@@ -14,7 +11,7 @@ import org.playerbot.ai.annotation.Table;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @Table(value = "item_instance")
-public class ItemInstance implements PostProcessor {
+public class ItemInstance {
     private long guid;
 
     @Key
@@ -179,52 +176,4 @@ public class ItemInstance implements PostProcessor {
     public void setDurability(long durability) {
         this.durability = durability;
     }
-
-    @Override
-    public void postProcess() {
-        if (creatorGuid == 0) {
-            creatorGuid = owner_guid;
-        }
-
-        // 0       1          2 3    4          5 6   7 8   9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27
-        // 5231232 1191182336 3 2361 1065353216 0 712 0 712 0 0  0  0  0  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 25 25 0 0
-        if (data != null) {
-            String[] values = data.split(" ");
-
-            if (values.length > 3)
-                itemEntry = Long.parseLong(values[3]); // OBJECT_FIELD_ENTRY = 3
-
-            if (values.length > 10)
-                creatorGuid = Long.parseLong(values[10]);
-
-            if (values.length > 12)
-                giftCreatorGuid = Long.parseLong(values[12]);
-
-            if (values.length > 14)
-                count = Long.parseLong(values[14]); // FIELD_STACK_COUNT = 6 + 8
-
-            if (values.length > 15)
-                duration = Long.parseLong(values[15]); // ITEM_FIELD_DURATION
-
-            if (values.length > 16)
-                charges = values[16]; // ITEM_FIELD_SPELL_CHARGES
-
-            if (values.length > 21)
-                flags = Long.parseLong(values[21]); // ITEM_FIELD_FLAGS
-
-            if (values.length > 57)
-                enchantments = StringUtils.join(Arrays.copyOfRange(values, 22, 57), " ");
-
-            if (values.length > 59)
-                randomPropertyId = Long.parseLong(values[59]); // ITEM_FIELD_RANDOM_PROPERTIES_ID
-
-            if (values.length > 62)
-                playedTime = Long.parseLong(values[62]);// ITEM_FIELD_CREATE_PLAYED_TIME
-        }
-
-        if (durability == 0) {
-            durability = 100;
-        }
-    }
-
 }

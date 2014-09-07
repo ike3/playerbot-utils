@@ -9,11 +9,14 @@ import java.util.concurrent.Future;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.WordUtils;
 import org.playerbot.ai.config.Configuration;
+import org.playerbot.ai.config.ConfigurationException;
 import org.playerbot.ai.db.Database;
 import org.playerbot.ai.db.DbException;
 import org.playerbot.ai.db.MangosDatabase;
 import org.playerbot.ai.db.XmlDatabase;
 import org.playerbot.ai.entity.Character;
+import org.playerbot.ai.postprocess.PostProcessor;
+import org.playerbot.ai.postprocess.R2ToTrinityPostProcessor;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
@@ -106,10 +109,29 @@ public class Main {
             }
 
             linkColumns(character);
+            postProcess(character);
             destination.update(character);
         }
 
         dumpXml();
+    }
+
+    private void postProcess(Character character) throws ConfigurationException {
+        PostProcessor postProcessor = getPostProcessor();
+        if (postProcessor != null) {
+            postProcessor.postProcess(character);
+        }
+    }
+
+    private PostProcessor getPostProcessor() throws ConfigurationException {
+        String sourceVersion = config.getDatabaseConfiguration(sourceConnectionName).getVersion();
+        String destinationVersion = config.getDatabaseConfiguration(destinationConnectionName).getVersion();
+
+        if ("r2".equals(sourceVersion) && "tc".equals(destinationVersion)) {
+            return new R2ToTrinityPostProcessor();
+        }
+
+        return null;
     }
 
     private void linkColumns(Character character) throws Exception {
