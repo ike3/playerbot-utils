@@ -9,6 +9,8 @@
 
 <link rel="stylesheet" href="static/css/bootstrap.min.css">
 <link rel="stylesheet" href="static/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="static/css/darkstrap.css">
+
 <link rel="stylesheet" href="static/css/index.css">
 
 <script src="static/js/jquery.min.js"></script>
@@ -17,7 +19,7 @@
 
 <script src="static/js/index.js"></script>
 
-<title>Insert title here</title>
+<title>MaNGOS-Bot Monitoring</title>
 </head>
 
 <body ng-app="monitoring">
@@ -31,7 +33,7 @@
 				<div class="form-group">
 					<label for="botName" class="col-sm-2 control-label">Name</label>
 					<div class="col-sm-10">
-						<input class="form-control" type="text" name="botName" ng-model="botName" placeholder="Enter name"/>
+						<input class="form-control" type="text" name="botName" ng-model="botName" placeholder="Enter first symbols of a character name"/>
 					</div> 
 				</div>
 				<div class="form-group">
@@ -53,14 +55,15 @@
 				</div>
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">
-						<input type="submit" value="Find" class="btn btn-default">
+						<input type="submit" value="Find" class="btn btn-primary">
 					</div>
 				</div>
 			</form>
 		</div>
 
 		<div class="row" id="bot-search-results" >
-			<table class="table">
+			<div ng-show="botsLoading" class="loading-spiner"><img src="static/img/ajax-loader.gif" /></div>
+			<table class="table" ng-hide="botsLoading">
 				<thead>
 					<tr>
 						<th>Guid</th>

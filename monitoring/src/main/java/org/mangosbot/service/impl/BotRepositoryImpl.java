@@ -31,7 +31,7 @@ public class BotRepositoryImpl extends NamedParameterJdbcDaoSupport implements B
         List<Object> params = new ArrayList<Object>();
         if (!StringUtils.isEmpty(query.getName())) {
             sqlBuilder.WHERE("c.name like ?");
-            params.add("%" + query.getName() + "%");
+            params.add(query.getName() + "%");
         }
         if (!StringUtils.isEmpty(query.getFaction())) {
             sqlBuilder.WHERE("c.race in (" + StringUtils.join(Faction.valueOf(query.getFaction()).getRaces(), ',') + ")");
