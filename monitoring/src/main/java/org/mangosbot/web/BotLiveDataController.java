@@ -3,7 +3,7 @@ package org.mangosbot.web;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.mangosbot.service.api.BotRepository;
+import org.mangosbot.service.api.LiveDataService;
 import org.mangosbot.service.api.dto.LiveData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,14 +17,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class BotLiveDataController {
 
     @Autowired
-    private BotRepository botService;
+    private LiveDataService liveDataService;
 
     @RequestMapping(value = "/live-data.json", method = RequestMethod.POST)
     public @ResponseBody Map<Long, LiveData> home(@RequestBody Long[] guids) {
         HashMap<Long, LiveData> map = new HashMap<Long, LiveData>();
         for (long guid : guids) {
-            LiveData data = new LiveData();
-            data.setState(Double.toString(Math.random()));
+            LiveData data = liveDataService.get(guid);
             map.put(guid, data);
         }
         return map;

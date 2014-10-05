@@ -15,4 +15,9 @@
 
     <import resource="classpath:/db-context.xml"/>
 
+    <bean id="liveDataService" class="org.mangosbot.service.impl.LiveDataServiceImpl">
+        <property name="host" value="localhost"/>
+        <property name="port" value="8888"/>
+    </bean>
+
 </beans>
