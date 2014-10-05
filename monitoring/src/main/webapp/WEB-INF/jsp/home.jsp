@@ -54,8 +54,13 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-10">
+					<div class="col-sm-offset-2 col-sm-2">
 						<input type="submit" value="Find" class="btn btn-primary">
+					</div>
+					<label class="col-sm-6 control-label">Live Update</label>
+					<div class="col-sm-2">
+						<input type="button" value="Pause" class="btn btn-warning" ng-click="stopLiveUpdate()" ng-disabled="!liveUpdate">
+						<input type="button" value="Continue" class="btn btn-success" ng-click="startLiveUpdate()" ng-disabled="liveUpdate">
 					</div>
 				</div>
 			</form>
@@ -66,10 +71,11 @@
 			<table class="table" ng-hide="botsLoading">
 				<thead>
 					<tr>
-						<th>Guid</th>
-						<th>Name</th>
-						<th>Class</th>
-						<th>Race</th>
+						<th width="10%">Guid</th>
+						<th width="10%">Name</th>
+						<th width="10%">Class</th>
+						<th width="10%">Race</th>
+						<th>State</th>
 					</tr>
 				</thead>
 				<tr ng-repeat="bot in bots">
@@ -77,6 +83,7 @@
 					<td><span ng-bind="bot.name" /></td>
 					<td><img ng-src="{{'static/img/class/' + bot.cls + '.gif'}}"/></td>
 					<td><img ng-src="{{'static/img/race/' + bot.race + '-' + bot.gender + '.gif'}}"/></td>
+					<td>{{bot.liveData.state}}</td>
 				</tr>
 			</table>
 		</div>

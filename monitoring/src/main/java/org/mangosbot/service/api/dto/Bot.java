@@ -6,6 +6,7 @@ public class Bot {
     private long cls;
     private long race;
     private long gender;
+    private LiveData liveData;
 
     public long getGuid() {
         return guid;
@@ -45,6 +46,14 @@ public class Bot {
 
     public void setGender(long gender) {
         this.gender = gender;
+    }
+
+    public LiveData getLiveData() {
+        return liveData;
+    }
+
+    public void setLiveData(LiveData runtime) {
+        this.liveData = runtime;
     }
 
 }

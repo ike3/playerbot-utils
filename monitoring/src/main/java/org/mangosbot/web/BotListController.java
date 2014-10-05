@@ -17,7 +17,7 @@ public class BotListController {
     @Autowired
     private BotRepository botService;
 
-    @RequestMapping(value = "/bot-list.json", method = RequestMethod.POST)
+    @RequestMapping(value = "/bots.json", method = RequestMethod.POST)
     public @ResponseBody Bot[] home(@RequestBody BotSearchQuery query) {
         return botService.search(query).toArray(new Bot[] {});
     }
