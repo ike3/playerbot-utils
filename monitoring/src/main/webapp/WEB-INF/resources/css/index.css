@@ -1,0 +1,28 @@
+@CHARSET "UTF-8";
+
+#bot-search-form {
+	margin-right: 0;
+	margin-left: 0;
+	background-color: #fff;
+	border-color: #ddd;
+	border-width: 1px;
+	border-radius: 4px 4px 0 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	position: relative;
+	padding: 45px 15px 15px;
+	margin: 0 -15px 15px;
+}
+
+#bot-search-form:after {
+	position: absolute;
+	top: 15px;
+	left: 15px;
+	font-size: 12px;
+	font-weight: 700;
+	color: #959595;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	content: "Search Parameters";
+}
+
