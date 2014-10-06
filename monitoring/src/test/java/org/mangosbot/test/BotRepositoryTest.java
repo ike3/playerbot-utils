@@ -34,7 +34,7 @@ public class BotRepositoryTest extends AbstractTransactionalJUnit4SpringContextT
         query.setName(bots.get(0).getName());
         assertSearchOk(query);
 
-        query.setName(bots.get(0).getName().substring(1, 3));
+        query.setName(bots.get(0).getName().substring(0, 3));
         assertSearchOk(query);
 
         query.setFaction(Faction.Alliance.name());
