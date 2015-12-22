@@ -74,6 +74,31 @@ angular.module('monitoring', [])
 				return result;
 			}
 
+			function buildMinimap(bot) {
+				var pos = bot.liveData.position.split(",");
+				var botX = parseFloat(pos[1]);
+				var botY = parseFloat(pos[2]);
+
+				var minimap = bot.minimap;
+				if (!minimap) {
+					minimap = {};
+				}
+
+				var cx = botX, cy = botY;
+				if (!minimap.translate || Math.sqrt((cx + minimap.translate.x)*(cx + minimap.translate.x) + (cy + minimap.translate.y)*(cy + minimap.translate.y)) > 50) {
+					minimap.translate = {x: -cx, y : -cy};
+				}
+
+				minimap.bot = { x: botX, y: botY };
+
+				var tpos = bot.liveData.tpos.split(",");
+				if (tpos) {
+					minimap.target = { x: parseFloat(tpos[1]), y: parseFloat(tpos[2]) };
+				}
+
+				return minimap;
+			}
+
 			$scope.startLiveUpdate = function() {
 				$scope.liveUpdate = $interval(function() {
 					$http.post("bot/live-data.json",
@@ -88,6 +113,8 @@ angular.module('monitoring', [])
 							});
 							bot.liveData.lastAction = bot.liveData.actions[bot.liveData.actions.length - 1];
 							bot.liveData.actionGroups = groupActions(bot.liveData.actions);
+
+							bot.minimap = buildMinimap(bot);
 
 							if (!bot.actionHistory) bot.actionHistory = [];
 							angular.forEach(bot.liveData.actionGroups, function(group) {

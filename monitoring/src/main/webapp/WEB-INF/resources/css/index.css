@@ -60,3 +60,26 @@ body {
 .pull-right {
 	float: right;
 }
+
+#canvas {
+	float: right;
+	position: relative;
+	top: 0px;
+	border: solid 1px gray;
+}
+
+#canvas .bot.combat {
+	fill: yellow;
+}
+
+#canvas .bot.dead {
+	fill: gray;
+}
+
+#canvas .bot {
+	fill: white;
+}
+
+#canvas .target {
+	fill: red;
+}

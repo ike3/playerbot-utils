@@ -16,6 +16,14 @@
 
         <h3>Action Log</h3>
         <div ng-repeat="bot in bots" class="action-history">
+            <svg id="canvas" height="300" width="300">
+                <g transform="translate(150,150)scale(5)">
+                    <g transform="translate({{bot.minimap.translate.x}},{{bot.minimap.translate.y}})">
+                        <circle class="bot {{bot.liveData.state}}" cx="{{bot.minimap.bot.x}}" cy="{{bot.minimap.bot.y}}" r="1"/>
+                        <circle class="target" cx="{{bot.minimap.target.x}}" cy="{{bot.minimap.target.y}}" r="1" />
+                    </g>
+                </g>
+            </svg>
             <div ng-repeat="group in bot.actionHistory">
                 <span ng-show="{{group.type == 'A'}}">
                     <span class="tab">&nbsp;</span><span class="tab">&nbsp;</span>
@@ -43,6 +51,7 @@
                 </span>
             </div>
         </div>
+
 	</div>
 </body>
 

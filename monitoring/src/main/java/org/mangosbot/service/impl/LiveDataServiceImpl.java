@@ -54,6 +54,7 @@ public class LiveDataServiceImpl implements LiveDataService {
         LiveData data = new LiveData();
         data.setState(query("state,"+ guid));
         data.setPosition(query("position,"+ guid));
+        data.setTpos(query("tpos,"+ guid));
         data.setTarget(query("target,"+ guid));
         data.setHp(query("hp,"+ guid));
         data.setAction(query("action,"+ guid));

@@ -3,6 +3,7 @@ package org.mangosbot.service.api.dto;
 public class LiveData {
     private String state;
     private String position;
+    private String tpos;
     private String target;
     private String hp;
     private String action;
@@ -45,6 +46,14 @@ public class LiveData {
 
     public void setAction(String action) {
         this.action = action;
+    }
+
+    public String getTpos() {
+        return tpos;
+    }
+
+    public void setTpos(String tpos) {
+        this.tpos = tpos;
     }
 
 }
