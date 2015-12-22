@@ -85,7 +85,7 @@ angular.module('monitoring', [])
 				}
 
 				var cx = botX, cy = botY;
-				if (!minimap.translate || Math.sqrt((cx + minimap.translate.x)*(cx + minimap.translate.x) + (cy + minimap.translate.y)*(cy + minimap.translate.y)) > 50) {
+				if (!minimap.translate || Math.sqrt((cx + minimap.translate.x)*(cx + minimap.translate.x) + (cy + minimap.translate.y)*(cy + minimap.translate.y)) > 30) {
 					minimap.translate = {x: -cx, y : -cy};
 				}
 
