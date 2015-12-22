@@ -29,3 +29,34 @@ body {
 	content: "Search Parameters";
 }
 
+.action-history .action, .action-history .push, .action-history .trigger {
+	padding-right: 10px;
+}
+
+.action-history .trigger {
+	padding-top: 10px;
+}
+
+.action-history .tab {
+	padding-left: 40px;
+}
+
+.action-history .action.OK {
+	color: green;
+}
+
+.action-history .action.FAILED {
+	color: red;
+}
+
+.action-history .action.IMPOSSIBLE {
+	color: #514E4E;
+}
+
+.action-history .action.USELESS {
+	color: gray;
+}
+
+.pull-right {
+	float: right;
+}
