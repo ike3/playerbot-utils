@@ -35,6 +35,10 @@
                         <g transform="translate({{bot.minimap.translate.x}},{{bot.minimap.translate.y}})">
                             <circle class="bot {{bot.liveData.state}}" cx="{{bot.minimap.bot.x}}" cy="{{bot.minimap.bot.y}}" r="1"/>
                             <circle class="target" cx="{{bot.minimap.target.x}}" cy="{{bot.minimap.target.y}}" r="1" />
+                            <g class="movement" transform="translate({{bot.minimap.movement.x}},{{bot.minimap.movement.y}})">
+                                <line x1="-1" y1="-1" x2="1" y2="1"/>
+                                <line x1="1" y1="-1" x2="-1" y2="1"/>
+                            </g>
                         </g>
                     </g>
                 </svg>

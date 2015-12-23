@@ -8,6 +8,7 @@ public class LiveData {
     private String hp;
     private String action;
     private String values;
+    private String movement;
 
     public String getState() {
         return state;
@@ -63,6 +64,14 @@ public class LiveData {
 
     public void setValues(String values) {
         this.values = values;
+    }
+
+    public String getMovement() {
+        return movement;
+    }
+
+    public void setMovement(String movement) {
+        this.movement = movement;
     }
 
 }

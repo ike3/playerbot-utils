@@ -103,6 +103,11 @@ angular.module('monitoring', [])
 					minimap.target = { x: parseFloat(tpos[0]), y: parseFloat(tpos[1]) };
 				}
 
+				var movement = bot.liveData.movement.split(" ");
+				if (movement) {
+					minimap.movement = { x: parseFloat(movement[0]), y: parseFloat(movement[1]) };
+				}
+
 				return minimap;
 			}
 

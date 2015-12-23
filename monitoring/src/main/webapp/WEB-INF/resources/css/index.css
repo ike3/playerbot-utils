@@ -88,6 +88,11 @@ body {
 	fill: red;
 }
 
+#canvas .movement line {
+	stroke: gray;
+	stroke-width: 0.2px;
+}
+
 .sortOrder.sortDesc:after {
     content: '\25bc';
 }
