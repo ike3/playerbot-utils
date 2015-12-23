@@ -58,6 +58,7 @@ public class LiveDataServiceImpl implements LiveDataService {
         data.setTarget(query("target,"+ guid));
         data.setHp(query("hp,"+ guid));
         data.setAction(query("action,"+ guid));
+        data.setValues(query("values,"+ guid));
         return data;
     }
 

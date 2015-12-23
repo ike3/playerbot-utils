@@ -14,16 +14,31 @@
 
         <%@include file="search-results.jsp" %>
 
-        <h3>Action Log</h3>
         <div ng-repeat="bot in bots" class="action-history">
-            <svg id="canvas" height="300" width="300">
-                <g transform="translate(150,150)scale(5)">
-                    <g transform="translate({{bot.minimap.translate.x}},{{bot.minimap.translate.y}})">
-                        <circle class="bot {{bot.liveData.state}}" cx="{{bot.minimap.bot.x}}" cy="{{bot.minimap.bot.y}}" r="1"/>
-                        <circle class="target" cx="{{bot.minimap.target.x}}" cy="{{bot.minimap.target.y}}" r="1" />
+            <div class="right-area">
+                <table class="values">
+                    <thead>
+                        <th>Name</th>
+                        <th>Value</th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="v in bot.liveData.valueList">
+                            <td>{{v.name}}</td>
+                            <td title="{{v.value}}">{{v.value}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="right-area">
+                <svg id="canvas" height="150" width="150">
+                    <g transform="translate(75,75)scale(5)">
+                        <g transform="translate({{bot.minimap.translate.x}},{{bot.minimap.translate.y}})">
+                            <circle class="bot {{bot.liveData.state}}" cx="{{bot.minimap.bot.x}}" cy="{{bot.minimap.bot.y}}" r="1"/>
+                            <circle class="target" cx="{{bot.minimap.target.x}}" cy="{{bot.minimap.target.y}}" r="1" />
+                        </g>
                     </g>
-                </g>
-            </svg>
+                </svg>
+            </div>
             <div ng-repeat="group in bot.actionHistory">
                 <span ng-show="{{group.type == 'A'}}">
                     <span class="tab">&nbsp;</span><span class="tab">&nbsp;</span>

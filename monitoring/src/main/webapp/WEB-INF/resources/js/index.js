@@ -82,9 +82,9 @@ angular.module('monitoring', [])
 			}
 
 			function buildMinimap(bot) {
-				var pos = bot.liveData.position.split(",");
-				var botX = parseFloat(pos[1]);
-				var botY = parseFloat(pos[2]);
+				var pos = bot.liveData.position.split(" ");
+				var botX = parseFloat(pos[0]);
+				var botY = parseFloat(pos[1]);
 
 				var minimap = bot.minimap;
 				if (!minimap) {
@@ -92,18 +92,34 @@ angular.module('monitoring', [])
 				}
 
 				var cx = botX, cy = botY;
-				if (!minimap.translate || Math.sqrt((cx + minimap.translate.x)*(cx + minimap.translate.x) + (cy + minimap.translate.y)*(cy + minimap.translate.y)) > 30) {
+				if (!minimap.translate || Math.sqrt((cx + minimap.translate.x)*(cx + minimap.translate.x) + (cy + minimap.translate.y)*(cy + minimap.translate.y)) > 15) {
 					minimap.translate = {x: -cx, y : -cy};
 				}
 
 				minimap.bot = { x: botX, y: botY };
 
-				var tpos = bot.liveData.tpos.split(",");
+				var tpos = bot.liveData.tpos.split(" ");
 				if (tpos) {
-					minimap.target = { x: parseFloat(tpos[1]), y: parseFloat(tpos[2]) };
+					minimap.target = { x: parseFloat(tpos[0]), y: parseFloat(tpos[1]) };
 				}
 
 				return minimap;
+			}
+
+			function splitValues(str) {
+				var result = [];
+				var map = {};
+				var values = str.split("|");
+				angular.forEach(values, function(value) {
+					if (value) {
+						var ss = value.substring(1, value.length - 1).split("=");
+						if (!map[ss[0]]) {
+							map[ss[0]] = true;
+							result.push({ name: ss[0], value: ss[1] });
+						}
+					}
+				});
+				return result;
 			}
 
 			$scope.startLiveUpdate = function() {
@@ -119,7 +135,10 @@ angular.module('monitoring', [])
 								bot.liveData.actions.push(convertAction(action));
 							});
 							bot.liveData.lastAction = bot.liveData.actions[bot.liveData.actions.length - 1];
-							bot.liveData.actionGroups = groupActions(bot.liveData.actions);
+							if ($scope.bots.length == 1) {
+								bot.liveData.actionGroups = groupActions(bot.liveData.actions);
+								bot.liveData.valueList = splitValues(bot.liveData.values);
+							}
 
 							bot.minimap = buildMinimap(bot);
 

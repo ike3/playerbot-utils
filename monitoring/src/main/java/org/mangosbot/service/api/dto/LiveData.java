@@ -7,6 +7,7 @@ public class LiveData {
     private String target;
     private String hp;
     private String action;
+    private String values;
 
     public String getState() {
         return state;
@@ -54,6 +55,14 @@ public class LiveData {
 
     public void setTpos(String tpos) {
         this.tpos = tpos;
+    }
+
+    public String getValues() {
+        return values;
+    }
+
+    public void setValues(String values) {
+        this.values = values;
     }
 
 }
