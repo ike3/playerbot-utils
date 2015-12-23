@@ -95,3 +95,49 @@ body {
 .sortable {
 	cursor: pointer;
 }
+
+.bot-table td {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.bot-table {
+	table-layout: fixed;
+}
+
+.bot-table th:nth-child(1) {
+	width: 50px;
+}
+
+.bot-table th:nth-child(2) {
+	width: 120px;
+}
+
+.bot-table th:nth-child(3) {
+	width: 70px;
+}
+
+.bot-table th:nth-child(4) {
+	width: 50px;
+}
+
+.bot-table th:nth-child(5) {
+	width: 70px;
+}
+
+.bot-table th:nth-child(6) {
+	width: 100px;
+}
+
+.bot-table th:nth-child(7) {
+	width: 150px;
+}
+
+.bot-table th:nth-child(8) {
+	width: 100px;
+}
+
+.bot-table th:nth-child(9) {
+    width: 200px;
+}

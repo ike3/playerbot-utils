@@ -21,7 +21,7 @@ public class BotRepositoryImpl extends NamedParameterJdbcDaoSupport implements B
     @Transactional(readOnly = true)
     public List<Bot> search(BotSearchQuery query) {
         SqlBuilder sqlBuilder = new SqlBuilder()
-            .SELECT("c.guid,c.name,c.class,c.race,c.gender")
+            .SELECT("c.guid,c.name,c.class,c.race,c.gender,c.level")
             .FROM("characters c")
             .JOIN("ai_playerbot_random_bots rb on rb.bot = c.guid")
             .WHERE("rb.event = 'online'")
@@ -48,6 +48,7 @@ public class BotRepositoryImpl extends NamedParameterJdbcDaoSupport implements B
                         bot.setCls(rs.getLong("class"));
                         bot.setRace(rs.getLong("race"));
                         bot.setGender(rs.getLong("gender"));
+                        bot.setLevel(rs.getLong("level"));
                         return bot;
                     }
                 });
