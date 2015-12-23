@@ -83,3 +83,15 @@ body {
 #canvas .target {
 	fill: red;
 }
+
+.sortOrder.sortDesc:after {
+    content: '\25bc';
+}
+
+.sortOrder:after {
+    content: '\25b2';
+}
+
+.sortable {
+	cursor: pointer;
+}

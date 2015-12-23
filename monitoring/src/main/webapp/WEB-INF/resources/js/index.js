@@ -25,6 +25,8 @@ angular.module('monitoring', [])
 		[ '$scope', '$http', '$interval', '$location', function($scope, $http, $interval, $location) {
 			$scope.botName = $location.search().name;
 			$scope.faction = "Alliance";
+			$scope.sortBy = "name";
+			$scope.sortDesc = false;
 
 			$scope.bots = [];
 			$scope.botsLoading = false
@@ -36,6 +38,11 @@ angular.module('monitoring', [])
 				}
 				$scope.liveUpdate = null;
 			};
+
+			$scope.changeSortOrder = function(sortBy) {
+			    $scope.sortDesc = ($scope.sortBy === sortBy) ? !$scope.sortDesc : false;
+			    $scope.sortBy = sortBy;
+		    };
 
 			function convertAction(str) {
 				var p1 = str.indexOf(":");
