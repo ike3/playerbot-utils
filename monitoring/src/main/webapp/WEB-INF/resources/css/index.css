@@ -42,7 +42,7 @@ body {
 }
 
 .action-history .action.OK {
-	color: green;
+	color: #00F000;
 }
 
 .action-history .action.FAILED {
@@ -55,6 +55,10 @@ body {
 
 .action-history .action.USELESS {
 	color: gray;
+}
+
+.action-history .action.PREREQ {
+	color: #00a000;
 }
 
 .pull-right {
