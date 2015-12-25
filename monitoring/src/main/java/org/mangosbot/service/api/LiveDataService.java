@@ -4,6 +4,6 @@ import org.mangosbot.service.api.dto.LiveData;
 
 public interface LiveDataService {
 
-    LiveData get(long guid);
+    LiveData get(long guid, boolean extended);
 
 }

@@ -50,16 +50,18 @@ public class LiveDataServiceImpl implements LiveDataService {
     }
 
     @Override
-    public LiveData get(long guid) {
+    public LiveData get(long guid, boolean extended) {
         LiveData data = new LiveData();
         data.setState(query("state,"+ guid));
         data.setPosition(query("position,"+ guid));
-        data.setTpos(query("tpos,"+ guid));
         data.setTarget(query("target,"+ guid));
         data.setHp(query("hp,"+ guid));
         data.setAction(query("action,"+ guid));
-        data.setValues(query("values,"+ guid));
-        data.setMovement(query("movement,"+ guid));
+        if (extended) {
+            data.setTpos(query("tpos,"+ guid));
+            data.setValues(query("values,"+ guid));
+            data.setMovement(query("movement,"+ guid));
+        }
         return data;
     }
 

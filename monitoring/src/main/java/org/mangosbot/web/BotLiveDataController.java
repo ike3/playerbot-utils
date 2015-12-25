@@ -23,7 +23,7 @@ public class BotLiveDataController {
     public @ResponseBody Map<Long, LiveData> home(@RequestBody Long[] guids) {
         HashMap<Long, LiveData> map = new HashMap<Long, LiveData>();
         for (long guid : guids) {
-            LiveData data = liveDataService.get(guid);
+            LiveData data = liveDataService.get(guid, guids.length == 1);
             map.put(guid, data);
         }
         return map;

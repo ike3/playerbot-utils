@@ -1,4 +1,6 @@
 var MAX_HISTORY_SIZE = 30;
+var UPDATE_INTERVAL = 100;
+var STALE_ITER_COUNT = 60 * 1000 / UPDATE_INTERVAL;
 angular.module('monitoring', [])
 .config(['$locationProvider', function($locationProvider) {
         $locationProvider.html5Mode(true);
@@ -21,6 +23,17 @@ angular.module('monitoring', [])
 		return result;
 	};
 })
+.filter('onlyWithProblems', function() {
+	return function(bots) {
+		var result = [];
+		for (var i = 0; i < bots.length; i++) {
+			if (bots[i].problems) {
+				result.push(bots[i]);
+			}
+		}
+		return result;
+	};
+})
 .controller('MonitoringController',
 		[ '$scope', '$http', '$interval', '$location', function($scope, $http, $interval, $location) {
 			$scope.botName = $location.search().name;
@@ -31,6 +44,8 @@ angular.module('monitoring', [])
 			$scope.bots = [];
 			$scope.botsLoading = false
 			$scope.liveUpdate = null;
+			$scope.iterCount = STALE_ITER_COUNT;
+			$scope.coldStart = true;
 
 			$scope.stopLiveUpdate = function() {
 				if ($scope.liveUpdate) {
@@ -127,6 +142,36 @@ angular.module('monitoring', [])
 				return result;
 			}
 
+			function monitorProblems(bot) {
+          	  	var ctx = this[bot.guid];
+          	  	if (!ctx) ctx = this[bot.guid] = { lastActionCount: 0 };
+
+				var strategies = [
+					  function(bot) {
+						  if (ctx.lastAction == bot.liveData.lastAction.text) ctx.lastActionCount++;
+						  else ctx.lastActionCount = 0;
+						  ctx.lastAction = bot.liveData.lastAction.text;
+
+						  return ctx.lastActionCount > STALE_ITER_COUNT ? "StaleAction (" + ctx.lastAction + ")" : "";
+					  },
+					  function(bot) {
+						  if (!bot.liveData.target || bot.liveData.state == "dead") return "";
+
+						  if (ctx.target == bot.liveData.target) ctx.sameTargetCount++;
+						  else ctx.sameTargetCount = 0;
+						  ctx.target = bot.liveData.target;
+
+						  return ctx.sameTargetCount > STALE_ITER_COUNT ? "StaleTarget (" + ctx.target + ")" : "";
+					  }
+                ];
+				var result = [];
+				for (var i = 0; i < strategies.length; i++) {
+					var problem = strategies[i](bot);
+					if (problem) result.push(problem);
+				}
+				return result.toString();
+			}
+
 			$scope.startLiveUpdate = function() {
 				$scope.liveUpdate = $interval(function() {
 					$http.post("bot/live-data.json",
@@ -143,18 +188,20 @@ angular.module('monitoring', [])
 							if ($scope.bots.length == 1) {
 								bot.liveData.actionGroups = groupActions(bot.liveData.actions);
 								bot.liveData.valueList = splitValues(bot.liveData.values);
+								bot.minimap = buildMinimap(bot);
 							}
-
-							bot.minimap = buildMinimap(bot);
 
 							if (!bot.actionHistory) bot.actionHistory = [];
 							angular.forEach(bot.liveData.actionGroups, function(group) {
 								bot.actionHistory.push(group);
 							});
 							if (bot.actionHistory.length > MAX_HISTORY_SIZE) bot.actionHistory.splice(0, bot.actionHistory.length - MAX_HISTORY_SIZE);
+
+							bot.problems = monitorProblems(bot);
 						});
+						if ($scope.iterCount-- <= 0) $scope.coldStart = false;
 					});
-				}, 100);
+				}, UPDATE_INTERVAL);
 			};
 
 			$scope.search = function() {
