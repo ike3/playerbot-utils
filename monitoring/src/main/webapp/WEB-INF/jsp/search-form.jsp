@@ -10,7 +10,7 @@
         </div>
         <div class="form-group">
             <label for="botName" class="col-sm-2 control-label">Faction</label>
-            <div class="col-sm-10">
+            <div class="col-sm-2">
                 <div class="radio">
                   <label>
                     <input type="radio" name="faction" id="factionAlliance" value="Alliance" ng-model="faction">
@@ -21,6 +21,20 @@
                   <label>
                     <input type="radio" name="faction" id="factionHorde" value="Horde" ng-model="faction" >
                     Horde
+                  </label>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="viewMode" id="viewTable" value="Table" ng-model="viewMode">
+                    Table
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="viewMode" id="viewMap" value="Map" ng-model="viewMode" >
+                    Map
                   </label>
                 </div>
             </div>

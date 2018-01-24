@@ -14,7 +14,12 @@
 		</div>
 
         <%@include file="search-form.jsp" %>
-        <%@include file="search-results.jsp" %>
+        <div ng-show="viewMode == 'Table'">
+            <%@include file="search-results.jsp" %>
+        </div>
+        <div ng-show="viewMode == 'Map'">
+            <%@include file="search-map.jsp" %>
+        </div>
 	</div>
 </body>
 

@@ -201,3 +201,16 @@ body {
 .bot-problem-table th:nth-child(5) {
     width: 70px;
 }
+
+.bot-map-0 {
+}
+
+.bot-map-1 {
+	position: relative;
+	left: 50%;
+}
+
+.bot-map .hover {
+	fill: transparent;
+	stroke: transparent;
+}

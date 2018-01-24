@@ -41,3 +41,7 @@ src/main/java/META-INF/*
 tempDataSet.xml
 
 workspace
+.metadata
+.recommenders
+servers
+tomcat

@@ -38,6 +38,8 @@ angular.module('monitoring', [])
 		[ '$scope', '$http', '$interval', '$location', function($scope, $http, $interval, $location) {
 			$scope.botName = $location.search().name;
 			$scope.faction = "Alliance";
+			$scope.viewMode = "Map";
+			$scope.mapId = 0;
 			$scope.sortBy = "name";
 			$scope.sortDesc = false;
 
@@ -126,6 +128,67 @@ angular.module('monitoring', [])
 				return minimap;
 			}
 
+			function buildMap(data, mapId) {
+				var left = 0, right = 0, top = 0, bottom = 0;
+				switch (mapId)
+				{
+				case 0:
+					left = -19199.9;
+					right = 16000;
+					top = -16000;
+					bottom = 7466.6;
+					break;
+				case 1:
+					left = -19733.2;
+					right = 17066.6;
+					top = -11733.3;
+					bottom = 12799.9;
+					break;
+				}
+				var bots = [];
+				$($scope.bots).each(function(idx, bot) {
+					var liveData = data[bot.guid];
+					var pos = liveData.position.split(" ");
+					var botMap = parseFloat(pos[3]);
+					if (botMap != mapId) return;
+
+					var botX = parseFloat(pos[0]);
+					var botY = parseFloat(pos[1]);
+					bots.push({
+						y: botX,
+						x: botY,
+						liveData: liveData,
+						name: bot.name
+					});
+				});
+
+				var canvasWidth = 600.0, canvasHeight = 300.0;
+				var scaleX = canvasWidth / (right - left),
+					scaleY = canvasHeight / (bottom - top),
+					scale = Math.min(scaleX, scaleY);
+
+				canvasWidth = Math.ceil((right - left) * scale);
+				canvasHeight = Math.ceil((bottom - top) * scale);
+
+				$(bots).each(function() {
+					this.r = 5 / scale;
+				});
+
+				return {
+					scale: scale,
+					id: mapId,
+					size: {
+						y: canvasWidth,
+						x: canvasHeight
+					},
+					translate: {
+						y: -left,
+						x: -top
+					},
+					bots: bots
+				};
+			}
+
 			function splitValues(str) {
 				var result = [];
 				var map = {};
@@ -172,6 +235,10 @@ angular.module('monitoring', [])
 				return result.toString();
 			}
 
+			$scope.openBot = function(bot) {
+				window.open('bot.html?name=' + bot.name, '_blank');
+			}
+
 			$scope.startLiveUpdate = function() {
 				$scope.liveUpdate = $interval(function() {
 					$http.post("bot/live-data.json",
@@ -199,6 +266,7 @@ angular.module('monitoring', [])
 
 							bot.problems = monitorProblems(bot);
 						});
+						$scope.maps = [buildMap(data, 0), buildMap(data, 1)];
 						if ($scope.iterCount-- <= 0) $scope.coldStart = false;
 					});
 				}, UPDATE_INTERVAL);
