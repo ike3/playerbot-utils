@@ -41,7 +41,7 @@
 			<td>{{bot.liveData.target}}</td>
 			<td>{{bot.liveData.hp}}</td>
 			<td>{{bot.liveData.lastAction.text}}</td>
-			<td>{{bot.liveData.position}}</td>
+			<td>{{bot.liveData.location}}</td>
 		</tr>
 	</table>
 </div>

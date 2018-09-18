@@ -1,5 +1,5 @@
 var MAX_HISTORY_SIZE = 30;
-var UPDATE_INTERVAL = 100;
+var UPDATE_INTERVAL = 250;
 var STALE_ITER_COUNT = 60 * 1000 / UPDATE_INTERVAL;
 angular.module('monitoring', [])
 .config(['$locationProvider', function($locationProvider) {
@@ -133,19 +133,21 @@ angular.module('monitoring', [])
 				switch (mapId)
 				{
 				case 0:
-					left = -19199.9;
+					left = -6199.9;
+					top = -10000;
 					right = 16000;
-					top = -16000;
 					bottom = 7466.6;
 					break;
 				case 1:
-					left = -19733.2;
-					right = 17066.6;
-					top = -11733.3;
+					left = -11733.2;
+					right = 11066.6;
+					top = -5733.3;
 					bottom = 12799.9;
 					break;
 				}
 				var bots = [];
+				var mapWidth = right - left;
+				var mapHeight = bottom - top;
 				$($scope.bots).each(function(idx, bot) {
 					var liveData = data[bot.guid];
 					var pos = liveData.position.split(" ");
@@ -157,29 +159,35 @@ angular.module('monitoring', [])
 					bots.push({
 						y: botX,
 						x: botY,
+						map: botMap,
 						liveData: liveData,
-						name: bot.name
+						name: bot.name,
+						location: extractLocation(liveData.position)
 					});
 				});
 
-				var canvasWidth = 600.0, canvasHeight = 300.0;
-				var scaleX = canvasWidth / (right - left),
-					scaleY = canvasHeight / (bottom - top),
+				var canvasWidth = 450.0, canvasHeight = 300.0;
+				var scaleX = canvasWidth / mapWidth,
+					scaleY = canvasHeight / mapHeight,
 					scale = Math.min(scaleX, scaleY);
 
-				canvasWidth = Math.ceil((right - left) * scale);
-				canvasHeight = Math.ceil((bottom - top) * scale);
+				//canvasWidth = Math.ceil(mapWidth * scale);
+				//canvasHeight = Math.ceil(mapHeight * scale);
 
 				$(bots).each(function() {
 					this.r = 5 / scale;
+					this.title = this.name + " (" + this.location + ") x=" + this.x + ", y=" + this.y + ", map="+this.map;
 				});
 
 				return {
-					scale: scale,
+					scale: {y: scaleX, x: scaleY},
 					id: mapId,
 					size: {
 						y: canvasWidth,
 						x: canvasHeight
+					},
+					rotate: {
+						a: 180
 					},
 					translate: {
 						y: -left,
@@ -235,6 +243,12 @@ angular.module('monitoring', [])
 				return result.toString();
 			}
 
+			function extractLocation(position) {
+				var start = position.indexOf("|");
+				var end = position.indexOf("|", start + 1);
+				return position.substr(start + 1, end - 1);
+			}
+
 			$scope.openBot = function(bot) {
 				window.open('bot.html?name=' + bot.name, '_blank');
 			}
@@ -265,6 +279,9 @@ angular.module('monitoring', [])
 							if (bot.actionHistory.length > MAX_HISTORY_SIZE) bot.actionHistory.splice(0, bot.actionHistory.length - MAX_HISTORY_SIZE);
 
 							bot.problems = monitorProblems(bot);
+							if (bot.liveData.position) {
+								bot.liveData.location = extractLocation(bot.liveData.position);
+							}
 						});
 						$scope.maps = [buildMap(data, 0), buildMap(data, 1)];
 						if ($scope.iterCount-- <= 0) $scope.coldStart = false;

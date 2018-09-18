@@ -203,9 +203,11 @@ body {
 }
 
 .bot-map-0 {
+	background-image: url(../img/maps/0.jpg);
 }
 
 .bot-map-1 {
+    background-image: url(../img/maps/1.jpg);
 	position: relative;
 	left: 50%;
 }
